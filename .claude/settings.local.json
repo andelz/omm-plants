@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(npm run:*)"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\schulz\\dvp\\dvp-tmp\\omm-plants\\src\\app"
+    ]
+  }
+}

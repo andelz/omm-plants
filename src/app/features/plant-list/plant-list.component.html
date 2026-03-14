@@ -1,0 +1,57 @@
+<div class="list-header">
+  <h1 class="page-title">My Plants</h1>
+  <a routerLink="/plants/new" class="btn-primary">+ Add Plant</a>
+</div>
+
+<div class="search-bar">
+  <input
+    type="search"
+    class="input"
+    placeholder="Search plants..."
+    [value]="searchQuery()"
+    (input)="onSearchChange($any($event.target).value)"
+    aria-label="Search plants"
+  />
+</div>
+
+@if (filteredPlants().length === 0) {
+  <div class="empty-state">
+    @if (plants().length === 0) {
+      <p>No plants yet. <a routerLink="/plants/new" class="link">Add your first plant</a>.</p>
+    } @else {
+      <p>No plants match your search.</p>
+    }
+  </div>
+} @else {
+  <div class="grid">
+    @for (plant of filteredPlants(); track plant.id) {
+      <a [routerLink]="['/plants', plant.id]" class="card">
+        @if (plant.photo) {
+          <div class="card-photo">
+            <img [src]="plant.photo" [alt]="plant.name" />
+          </div>
+        }
+        <div class="card-body">
+          <div class="card-header-row">
+            <h2 class="card-name">{{ plant.name }}</h2>
+            <span class="badge badge-{{ plant.plantingLocation }}">{{ locationLabel(plant.plantingLocation) }}</span>
+          </div>
+          @if (nextDueNote(plant)) {
+            <p class="card-care due-note due-{{ plantStatus(plant) }}">
+              {{ nextDueNote(plant) }}
+            </p>
+          }
+          @if (plantStatus(plant) && plantStatus(plant) !== 'ok') {
+            <span class="status-badge status-{{ plantStatus(plant) }}">{{ statusLabel(plantStatus(plant)) }}</span>
+          }
+          @if (plant.notes) {
+            <p class="card-notes">{{ plant.notes }}</p>
+          }
+        </div>
+        <div class="card-footer">
+          <button class="btn-destructive btn-sm" (click)="deleteCard($event, plant)">Delete</button>
+        </div>
+      </a>
+    }
+  </div>
+}

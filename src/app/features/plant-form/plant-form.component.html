@@ -1,0 +1,97 @@
+<div class="form-page">
+  <div class="form-header">
+    <a routerLink="/plants" class="back-link">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 12H5M12 5l-7 7 7 7"/>
+      </svg>
+      Back
+    </a>
+    <h1 class="page-title">{{ isEdit() ? 'Edit Plant' : 'Add Plant' }}</h1>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-card" novalidate>
+
+    <div class="field">
+      <label class="label" for="name">Name <span class="required">*</span></label>
+      <input id="name" type="text" class="input" formControlName="name" placeholder="e.g. Tomato" />
+      @if (form.get('name')?.invalid && form.get('name')?.touched) {
+        <span class="error">Name is required.</span>
+      }
+    </div>
+
+    <div class="field">
+      <label class="label" for="location">Planting Location</label>
+      <select id="location" class="input" formControlName="plantingLocation">
+        <option value="sun">Full Sun</option>
+        <option value="partial-sun">Partial Sun</option>
+        <option value="shade">Shade</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label class="label" for="photo">Photo</label>
+      <input id="photo" type="file" accept="image/*" class="input file-input" (change)="onPhotoChange($event)" />
+      @if (form.get('photo')?.value) {
+        <div class="photo-preview">
+          <img [src]="form.get('photo')?.value" alt="Plant photo preview" />
+        </div>
+      }
+    </div>
+
+    <fieldset class="fieldset" formGroupName="careSchedule">
+      <legend class="legend">Care Schedule</legend>
+      <p class="fieldset-hint">Set an interval and when you last did each task. The app will track what's due.</p>
+
+      @for (task of [
+        { key: 'watering', label: 'Watering', icon: '💧' },
+        { key: 'pruning', label: 'Pruning', icon: '✂️' },
+        { key: 'fertilizing', label: 'Fertilizing', icon: '🌱' }
+      ]; track task.key) {
+        <div class="care-row" [formGroupName]="task.key">
+          <div class="care-row-label">
+            <span class="care-icon">{{ task.icon }}</span>
+            <span class="label">{{ task.label }}</span>
+          </div>
+          <div class="care-row-inputs">
+            <div class="field">
+              <label class="label-sm" [for]="task.key + '-interval'">Interval</label>
+              <select [id]="task.key + '-interval'" class="input input-sm" formControlName="interval">
+                <option value="">— not set —</option>
+                @for (opt of intervals; track opt.value) {
+                  <option [value]="opt.value">{{ opt.label }}</option>
+                }
+              </select>
+            </div>
+            <div class="field">
+              <label class="label-sm" [for]="task.key + '-lastDone'">Last done</label>
+              <input [id]="task.key + '-lastDone'" type="date" class="input input-sm" formControlName="lastDone" [max]="today" />
+            </div>
+          </div>
+        </div>
+      }
+    </fieldset>
+
+    <div class="field">
+      <label class="label">Links</label>
+      @for (ctrl of linksArray.controls; track $index) {
+        <div class="link-row">
+          <input type="url" class="input" [formControl]="$any(ctrl)" placeholder="https://..." />
+          <button type="button" class="btn-outline btn-sm" (click)="removeLink($index)">Remove</button>
+        </div>
+      }
+      <button type="button" class="btn-outline btn-sm add-link-btn" (click)="addLink()">+ Add Link</button>
+    </div>
+
+    <div class="field">
+      <label class="label" for="notes">Notes</label>
+      <textarea id="notes" class="input textarea" formControlName="notes" rows="4" placeholder="Any additional notes..."></textarea>
+    </div>
+
+    <div class="form-actions">
+      <a routerLink="/plants" class="btn-outline">Cancel</a>
+      <button type="submit" class="btn-primary" [disabled]="submitting()">
+        {{ submitting() ? 'Saving...' : (isEdit() ? 'Update Plant' : 'Add Plant') }}
+      </button>
+    </div>
+  </form>
+</div>

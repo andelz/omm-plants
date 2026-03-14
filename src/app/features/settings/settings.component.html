@@ -1,0 +1,26 @@
+<div class="settings-page">
+  <h1 class="page-title">Settings</h1>
+
+  <div class="settings-card">
+    <div class="setting-row">
+      <div class="setting-info">
+        <span class="setting-label">Dark Mode</span>
+        <span class="setting-description">Toggle between light and dark theme</span>
+      </div>
+      <button class="toggle-btn" (click)="theme.toggle()" [class.active]="theme.isDark()" aria-label="Toggle dark mode">
+        <span class="toggle-thumb"></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="settings-card danger-zone">
+    <h2 class="danger-title">Danger Zone</h2>
+    <div class="setting-row">
+      <div class="setting-info">
+        <span class="setting-label">Clear All Data</span>
+        <span class="setting-description">Permanently delete all plants from local storage</span>
+      </div>
+      <button class="btn-destructive" (click)="clearAllData()">Clear All</button>
+    </div>
+  </div>
+</div>
