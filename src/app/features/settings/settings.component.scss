@@ -87,6 +87,17 @@
   }
 }
 
+.lang-select {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  color: var(--fg);
+  border-radius: 6px;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
 .btn-destructive {
   background: transparent;
   border: 1px solid var(--destructive);

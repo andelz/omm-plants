@@ -8,7 +8,11 @@
       "Bash(npx tsc:*)",
       "Bash(npx ng:*)",
       "Bash(find c:/Users/schulz/dvp/dvp-tmp/omm-plants/node_modules/@ngx-translate/http-loader -name *.d.ts)",
-      "Bash(npm audit:*)"
+      "Bash(npm audit:*)",
+      "Bash(npm view:*)",
+      "Bash(npx ngx-translate-extract:*)",
+      "Read(//tmp/**)",
+      "Bash(node -e \"const f=require\\(''''./public/i18n/en.json''''\\); console.log\\(Object.keys\\(f\\).length + '''' keys in en.json''''\\)\")"
     ],
     "additionalDirectories": [
       "C:\\Users\\schulz\\dvp\\dvp-tmp\\omm-plants\\src\\app",

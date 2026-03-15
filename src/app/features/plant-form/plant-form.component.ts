@@ -2,19 +2,34 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormArray, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { marker } from 'ngx-translate-extract-marker';
 import { DbService } from '../../services/db.service';
 import { Plant, CARE_INTERVALS, CareTask, CareInterval } from '../../models/plant.model';
 
+// Marker-only block so ngx-translate-extract picks up keys used in ternary template expressions
+marker('PLANT_FORM.TITLE_ADD'); marker('PLANT_FORM.TITLE_EDIT');
+marker('PLANT_FORM.BACK'); marker('PLANT_FORM.NAME_LABEL'); marker('PLANT_FORM.NAME_PLACEHOLDER');
+marker('PLANT_FORM.NAME_REQUIRED'); marker('PLANT_FORM.LOCATION_LABEL');
+marker('PLANT_FORM.PHOTO_LABEL'); marker('PLANT_FORM.PHOTO_CHOOSE'); marker('PLANT_FORM.PHOTO_TAKE');
+marker('PLANT_FORM.PHOTO_REMOVE'); marker('PLANT_FORM.PHOTO_PREVIEW_ALT');
+marker('PLANT_FORM.CARE_SCHEDULE_LEGEND'); marker('PLANT_FORM.CARE_SCHEDULE_HINT');
+marker('PLANT_FORM.INTERVAL_LABEL'); marker('PLANT_FORM.INTERVAL_NOT_SET'); marker('PLANT_FORM.LAST_DONE_LABEL');
+marker('PLANT_FORM.LINKS_LABEL'); marker('PLANT_FORM.LINK_PLACEHOLDER');
+marker('PLANT_FORM.LINK_REMOVE'); marker('PLANT_FORM.LINK_ADD');
+marker('PLANT_FORM.NOTES_LABEL'); marker('PLANT_FORM.NOTES_PLACEHOLDER');
+marker('PLANT_FORM.CANCEL'); marker('PLANT_FORM.SAVE'); marker('PLANT_FORM.UPDATE'); marker('PLANT_FORM.SAVING');
+marker('LOCATION.SUN'); marker('LOCATION.PARTIAL_SUN'); marker('LOCATION.SHADE');
+
 const INTERVAL_KEY_MAP: Record<CareInterval, string> = {
-  'daily':          'CARE_INTERVAL.DAILY',
-  'every-2-days':   'CARE_INTERVAL.EVERY_2_DAYS',
-  'every-3-days':   'CARE_INTERVAL.EVERY_3_DAYS',
-  'weekly':         'CARE_INTERVAL.WEEKLY',
-  'every-2-weeks':  'CARE_INTERVAL.EVERY_2_WEEKS',
-  'monthly':        'CARE_INTERVAL.MONTHLY',
-  'seasonally':     'CARE_INTERVAL.SEASONALLY',
-  'yearly':         'CARE_INTERVAL.YEARLY',
-  'as-needed':      'CARE_INTERVAL.AS_NEEDED',
+  'daily':          marker('CARE_INTERVAL.DAILY'),
+  'every-2-days':   marker('CARE_INTERVAL.EVERY_2_DAYS'),
+  'every-3-days':   marker('CARE_INTERVAL.EVERY_3_DAYS'),
+  'weekly':         marker('CARE_INTERVAL.WEEKLY'),
+  'every-2-weeks':  marker('CARE_INTERVAL.EVERY_2_WEEKS'),
+  'monthly':        marker('CARE_INTERVAL.MONTHLY'),
+  'seasonally':     marker('CARE_INTERVAL.SEASONALLY'),
+  'yearly':         marker('CARE_INTERVAL.YEARLY'),
+  'as-needed':      marker('CARE_INTERVAL.AS_NEEDED'),
 };
 
 @Component({
@@ -36,9 +51,9 @@ export class PlantFormComponent implements OnInit {
 
   readonly intervals = CARE_INTERVALS.map(i => ({ value: i.value, labelKey: INTERVAL_KEY_MAP[i.value] }));
   readonly careTasks = [
-    { key: 'watering',    labelKey: 'CARE_TASK.WATERING',    icon: '💧' },
-    { key: 'pruning',     labelKey: 'CARE_TASK.PRUNING',     icon: '✂️' },
-    { key: 'fertilizing', labelKey: 'CARE_TASK.FERTILIZING', icon: '🌱' },
+    { key: 'watering',    labelKey: marker('CARE_TASK.WATERING'),    icon: '💧' },
+    { key: 'pruning',     labelKey: marker('CARE_TASK.PRUNING'),     icon: '✂️' },
+    { key: 'fertilizing', labelKey: marker('CARE_TASK.FERTILIZING'), icon: '🌱' },
   ] as const;
   readonly today = new Date().toISOString().split('T')[0];
 

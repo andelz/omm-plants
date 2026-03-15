@@ -39,7 +39,7 @@
           @if (nextDueNote(plant)) {
             <p class="card-care due-note due-{{ plantStatus(plant) }}">
               {{ nextDueNote(plant) }}
-            </p>
+            </p>  
           }
           @if (plantStatus(plant) && plantStatus(plant) !== 'ok') {
             <span class="status-badge status-{{ plantStatus(plant) }}">{{ statusLabel(plantStatus(plant)) }}</span>

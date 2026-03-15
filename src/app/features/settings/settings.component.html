@@ -4,6 +4,20 @@
   <div class="settings-card">
     <div class="setting-row">
       <div class="setting-info">
+        <span class="setting-label">{{ 'SETTINGS.LANGUAGE_LABEL' | translate }}</span>
+        <span class="setting-description">{{ 'SETTINGS.LANGUAGE_DESCRIPTION' | translate }}</span>
+      </div>
+      <select class="lang-select" [value]="currentLang()" (change)="setLanguage($any($event.target).value)">
+        @for (lang of languages; track lang.code) {
+          <option [value]="lang.code">{{ lang.label }}</option>
+        }
+      </select>
+    </div>
+  </div>
+
+  <div class="settings-card">
+    <div class="setting-row">
+      <div class="setting-info">
         <span class="setting-label">{{ 'SETTINGS.DARK_MODE_LABEL' | translate }}</span>
         <span class="setting-description">{{ 'SETTINGS.DARK_MODE_DESCRIPTION' | translate }}</span>
       </div>
