@@ -4,57 +4,57 @@
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M19 12H5M12 5l-7 7 7 7"/>
       </svg>
-      {{ 'PLANT_FORM.BACK' | translate }}
+      {{ 'plant_form.back' | translate }}
     </a>
-    <h1 class="page-title">{{ (isEdit() ? 'PLANT_FORM.TITLE_EDIT' : 'PLANT_FORM.TITLE_ADD') | translate }}</h1>
+    <h1 class="page-title">{{ (isEdit() ? 'plant_form.title_edit' : 'plant_form.title_add') | translate }}</h1>
   </div>
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-card" novalidate>
 
     <div class="field">
-      <label class="label" for="name">{{ 'PLANT_FORM.NAME_LABEL' | translate }} <span class="required">*</span></label>
-      <input id="name" type="text" class="input" formControlName="name" [placeholder]="'PLANT_FORM.NAME_PLACEHOLDER' | translate" />
+      <label class="label" for="name">{{ 'plant_form.name_label' | translate }} <span class="required">*</span></label>
+      <input id="name" type="text" class="input" formControlName="name" [placeholder]="'plant_form.name_placeholder' | translate" />
       @if (form.get('name')?.invalid && form.get('name')?.touched) {
-        <span class="error">{{ 'PLANT_FORM.NAME_REQUIRED' | translate }}</span>
+        <span class="error">{{ 'plant_form.name_required' | translate }}</span>
       }
     </div>
 
     <div class="field">
-      <label class="label" for="location">{{ 'PLANT_FORM.LOCATION_LABEL' | translate }}</label>
+      <label class="label" for="location">{{ 'plant_form.location_label' | translate }}</label>
       <select id="location" class="input" formControlName="plantingLocation">
-        <option value="sun">{{ 'LOCATION.SUN' | translate }}</option>
-        <option value="partial-sun">{{ 'LOCATION.PARTIAL_SUN' | translate }}</option>
-        <option value="shade">{{ 'LOCATION.SHADE' | translate }}</option>
+        <option value="sun">{{ 'location.sun' | translate }}</option>
+        <option value="partial-sun">{{ 'location.partial_sun' | translate }}</option>
+        <option value="shade">{{ 'location.shade' | translate }}</option>
       </select>
     </div>
 
     <div class="field">
-      <label class="label">{{ 'PLANT_FORM.PHOTO_LABEL' | translate }}</label>
+      <label class="label">{{ 'plant_form.photo_label' | translate }}</label>
       <div class="photo-inputs">
         <label class="btn-outline btn-sm photo-btn" for="photo">
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="12" r="3"/></svg>
-          {{ 'PLANT_FORM.PHOTO_CHOOSE' | translate }}
+          {{ 'plant_form.photo_choose' | translate }}
           <input id="photo" type="file" accept="image/*" class="sr-only" (change)="onPhotoChange($event)" />
         </label>
         <label class="btn-outline btn-sm photo-btn" for="photo-camera">
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-          {{ 'PLANT_FORM.PHOTO_TAKE' | translate }}
+          {{ 'plant_form.photo_take' | translate }}
           <input id="photo-camera" type="file" accept="image/*" capture="environment" class="sr-only" (change)="onPhotoChange($event)" />
         </label>
         @if (form.get('photo')?.value) {
-          <button type="button" class="btn-outline btn-sm photo-btn photo-btn-remove" (click)="removePhoto()">{{ 'PLANT_FORM.PHOTO_REMOVE' | translate }}</button>
+          <button type="button" class="btn-outline btn-sm photo-btn photo-btn-remove" (click)="removePhoto()">{{ 'plant_form.photo_remove' | translate }}</button>
         }
       </div>
       @if (form.get('photo')?.value) {
         <div class="photo-preview">
-          <img [src]="form.get('photo')?.value" [alt]="'PLANT_FORM.PHOTO_PREVIEW_ALT' | translate" />
+          <img [src]="form.get('photo')?.value" [alt]="'plant_form.photo_preview_alt' | translate" />
         </div>
       }
     </div>
 
     <fieldset class="fieldset" formGroupName="careSchedule">
-      <legend class="legend">{{ 'PLANT_FORM.CARE_SCHEDULE_LEGEND' | translate }}</legend>
-      <p class="fieldset-hint">{{ 'PLANT_FORM.CARE_SCHEDULE_HINT' | translate }}</p>
+      <legend class="legend">{{ 'plant_form.care_schedule_legend' | translate }}</legend>
+      <p class="fieldset-hint">{{ 'plant_form.care_schedule_hint' | translate }}</p>
 
       @for (task of careTasks; track task.key) {
         <div class="care-row" [formGroupName]="task.key">
@@ -64,16 +64,16 @@
           </div>
           <div class="care-row-inputs">
             <div class="field">
-              <label class="label-sm" [for]="task.key + '-interval'">{{ 'PLANT_FORM.INTERVAL_LABEL' | translate }}</label>
+              <label class="label-sm" [for]="task.key + '-interval'">{{ 'plant_form.interval_label' | translate }}</label>
               <select [id]="task.key + '-interval'" class="input input-sm" formControlName="interval">
-                <option value="">{{ 'PLANT_FORM.INTERVAL_NOT_SET' | translate }}</option>
+                <option value="">{{ 'plant_form.interval_not_set' | translate }}</option>
                 @for (opt of intervals; track opt.value) {
                   <option [value]="opt.value">{{ opt.labelKey | translate }}</option>
                 }
               </select>
             </div>
             <div class="field">
-              <label class="label-sm" [for]="task.key + '-lastDone'">{{ 'PLANT_FORM.LAST_DONE_LABEL' | translate }}</label>
+              <label class="label-sm" [for]="task.key + '-lastDone'">{{ 'plant_form.last_done_label' | translate }}</label>
               <input [id]="task.key + '-lastDone'" type="date" class="input input-sm" formControlName="lastDone" [max]="today" />
             </div>
           </div>
@@ -82,25 +82,25 @@
     </fieldset>
 
     <div class="field">
-      <label class="label">{{ 'PLANT_FORM.LINKS_LABEL' | translate }}</label>
+      <label class="label">{{ 'plant_form.links_label' | translate }}</label>
       @for (ctrl of linksArray.controls; track $index) {
         <div class="link-row">
-          <input type="url" class="input" [formControl]="$any(ctrl)" [placeholder]="'PLANT_FORM.LINK_PLACEHOLDER' | translate" />
-          <button type="button" class="btn-outline btn-sm" (click)="removeLink($index)">{{ 'PLANT_FORM.LINK_REMOVE' | translate }}</button>
+          <input type="url" class="input" [formControl]="$any(ctrl)" [placeholder]="'plant_form.link_placeholder' | translate" />
+          <button type="button" class="btn-outline btn-sm" (click)="removeLink($index)">{{ 'plant_form.link_remove' | translate }}</button>
         </div>
       }
-      <button type="button" class="btn-outline btn-sm add-link-btn" (click)="addLink()">{{ 'PLANT_FORM.LINK_ADD' | translate }}</button>
+      <button type="button" class="btn-outline btn-sm add-link-btn" (click)="addLink()">{{ 'plant_form.link_add' | translate }}</button>
     </div>
 
     <div class="field">
-      <label class="label" for="notes">{{ 'PLANT_FORM.NOTES_LABEL' | translate }}</label>
-      <textarea id="notes" class="input textarea" formControlName="notes" rows="4" [placeholder]="'PLANT_FORM.NOTES_PLACEHOLDER' | translate"></textarea>
+      <label class="label" for="notes">{{ 'plant_form.notes_label' | translate }}</label>
+      <textarea id="notes" class="input textarea" formControlName="notes" rows="4" [placeholder]="'plant_form.notes_placeholder' | translate"></textarea>
     </div>
 
     <div class="form-actions">
-      <a routerLink="/plants" class="btn-outline">{{ 'PLANT_FORM.CANCEL' | translate }}</a>
+      <a routerLink="/plants" class="btn-outline">{{ 'plant_form.cancel' | translate }}</a>
       <button type="submit" class="btn-primary" [disabled]="submitting()">
-        {{ submitting() ? ('PLANT_FORM.SAVING' | translate) : ((isEdit() ? 'PLANT_FORM.UPDATE' : 'PLANT_FORM.SAVE') | translate) }}
+        {{ submitting() ? ('plant_form.saving' | translate) : ((isEdit() ? 'plant_form.update' : 'plant_form.save') | translate) }}
       </button>
     </div>
   </form>

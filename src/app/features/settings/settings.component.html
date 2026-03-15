@@ -1,11 +1,11 @@
 <div class="settings-page">
-  <h1 class="page-title">{{ 'SETTINGS.TITLE' | translate }}</h1>
+  <h1 class="page-title">{{ 'settings.title' | translate }}</h1>
 
   <div class="settings-card">
     <div class="setting-row">
       <div class="setting-info">
-        <span class="setting-label">{{ 'SETTINGS.LANGUAGE_LABEL' | translate }}</span>
-        <span class="setting-description">{{ 'SETTINGS.LANGUAGE_DESCRIPTION' | translate }}</span>
+        <span class="setting-label">{{ 'settings.language_label' | translate }}</span>
+        <span class="setting-description">{{ 'settings.language_description' | translate }}</span>
       </div>
       <select class="lang-select" [value]="currentLang()" (change)="setLanguage($any($event.target).value)">
         @for (lang of languages; track lang.code) {
@@ -18,23 +18,23 @@
   <div class="settings-card">
     <div class="setting-row">
       <div class="setting-info">
-        <span class="setting-label">{{ 'SETTINGS.DARK_MODE_LABEL' | translate }}</span>
-        <span class="setting-description">{{ 'SETTINGS.DARK_MODE_DESCRIPTION' | translate }}</span>
+        <span class="setting-label">{{ 'settings.dark_mode_label' | translate }}</span>
+        <span class="setting-description">{{ 'settings.dark_mode_description' | translate }}</span>
       </div>
-      <button class="toggle-btn" (click)="theme.toggle()" [class.active]="theme.isDark()" [attr.aria-label]="'SETTINGS.TOGGLE_LABEL' | translate">
+      <button class="toggle-btn" (click)="theme.toggle()" [class.active]="theme.isDark()" [attr.aria-label]="'settings.toggle_label' | translate">
         <span class="toggle-thumb"></span>
       </button>
     </div>
   </div>
 
   <div class="settings-card danger-zone">
-    <h2 class="danger-title">{{ 'SETTINGS.DANGER_ZONE' | translate }}</h2>
+    <h2 class="danger-title">{{ 'settings.danger_zone' | translate }}</h2>
     <div class="setting-row">
       <div class="setting-info">
-        <span class="setting-label">{{ 'SETTINGS.CLEAR_DATA_LABEL' | translate }}</span>
-        <span class="setting-description">{{ 'SETTINGS.CLEAR_DATA_DESCRIPTION' | translate }}</span>
+        <span class="setting-label">{{ 'settings.clear_data_label' | translate }}</span>
+        <span class="setting-description">{{ 'settings.clear_data_description' | translate }}</span>
       </div>
-      <button class="btn-destructive" (click)="clearAllData()">{{ 'SETTINGS.CLEAR_DATA_BTN' | translate }}</button>
+      <button class="btn-destructive" (click)="clearAllData()">{{ 'settings.clear_data_btn' | translate }}</button>
     </div>
   </div>
 </div>

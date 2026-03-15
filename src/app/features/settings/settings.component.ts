@@ -32,8 +32,8 @@ export class SettingsComponent {
   }
 
   async clearAllData() {
-    const msg = this.translate.instant('SETTINGS.CLEAR_DATA_CONFIRM');
+    const msg = this.translate.instant('settings.clear_data_confirm');
     if (!window.confirm(msg)) return;
     await this.db.clearAll();
-    alert(this.translate.instant('SETTINGS.CLEAR_DATA_SUCCESS'));  }
+    alert(this.translate.instant('settings.clear_data_success'));  }
 }
