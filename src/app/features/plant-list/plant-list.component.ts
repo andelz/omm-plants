@@ -2,15 +2,8 @@ import { Component, inject, OnInit, signal, computed } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { marker } from 'ngx-translate-extract-marker';
 import { DbService } from '../../services/db.service';
 import { Plant, worstStatus, DueStatus, daysUntilDue } from '../../models/plant.model';
-
-// Marker-only block for keys used via pipe in templates
-marker('plant_list.title'); marker('plant_list.add_plant');
-marker('plant_list.search_placeholder'); marker('plant_list.search_label');
-marker('plant_list.empty_no_plants'); marker('plant_list.empty_add_first'); marker('plant_list.empty_no_match');
-marker('plant_list.delete');
 
 @Component({
   selector: 'app-plant-list',
@@ -48,7 +41,7 @@ export class PlantListComponent implements OnInit {
   async deleteCard(event: Event, plant: Plant) {
     event.preventDefault();
     event.stopPropagation();
-    const msg = this.translate.instant(marker('plant_list.delete_confirm'), { name: plant.name });
+    const msg = this.translate.instant('plant_list.delete_confirm', { name: plant.name });
     if (!window.confirm(msg)) return;
     await this.db.deletePlant(plant.id!);
     await this.loadPlants();
@@ -56,9 +49,9 @@ export class PlantListComponent implements OnInit {
 
   locationLabel(loc: Plant['plantingLocation']): string {
     const key = {
-      sun: marker('location.sun'),
-      'partial-sun': marker('location.partial_sun'),
-      shade: marker('location.shade'),
+      sun: 'location.sun',
+      'partial-sun': 'location.partial_sun',
+      shade: 'location.shade',
     }[loc];
     return this.translate.instant(key);
   }
@@ -70,11 +63,11 @@ export class PlantListComponent implements OnInit {
   statusLabel(status: DueStatus): string {
     switch (status) {
       case 'overdue':
-        return this.translate.instant(marker('status.overdue'));
+        return this.translate.instant('status.overdue');
       case 'due-today':
-        return this.translate.instant(marker('status.due_today'));
+        return this.translate.instant('status.due_today');
       case 'due-soon':
-        return this.translate.instant(marker('status.due_soon'));
+        return this.translate.instant('status.due_soon');
       default:
         return '';
     }
@@ -82,9 +75,9 @@ export class PlantListComponent implements OnInit {
 
   nextDueNote(plant: Plant): string {
     const tasks: { labelKey: string; task: Plant['careSchedule']['watering'] }[] = [
-      { labelKey: marker('care_task.watering'), task: plant.careSchedule.watering },
-      { labelKey: marker('care_task.pruning'), task: plant.careSchedule.pruning },
-      { labelKey: marker('care_task.fertilizing'), task: plant.careSchedule.fertilizing },
+      { labelKey: 'care_task.watering', task: plant.careSchedule.watering },
+      { labelKey: 'care_task.pruning', task: plant.careSchedule.pruning },
+      { labelKey: 'care_task.fertilizing', task: plant.careSchedule.fertilizing },
     ];
     let best: { labelKey: string; days: number } | null = null;
     for (const { labelKey, task } of tasks) {
@@ -96,8 +89,8 @@ export class PlantListComponent implements OnInit {
     if (!best) return '';
     const label = this.translate.instant(best.labelKey);
     if (best.days < 0)
-      return this.translate.instant(marker('due.task_overdue'), { label, days: Math.abs(best.days) });
-    if (best.days === 0) return this.translate.instant(marker('due.task_today'), { label });
-    return this.translate.instant(marker('due.task_in_days'), { label, days: best.days });
+      return this.translate.instant('due.task_overdue', { label, days: Math.abs(best.days) });
+    if (best.days === 0) return this.translate.instant('due.task_today', { label });
+    return this.translate.instant('due.task_in_days', { label, days: best.days });
   }
 }

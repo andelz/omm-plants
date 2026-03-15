@@ -2,12 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
 import { TranslateModule } from '@ngx-translate/core';
-import { marker } from 'ngx-translate-extract-marker';
 import { ThemeService } from '../../services/theme.service';
-
-// Marker-only block for keys used in ternary template expressions
-marker('nav.plants'); marker('nav.settings');
-marker('theme.switch_to_light'); marker('theme.switch_to_dark'); marker('theme.toggle_label');
 
 @Component({
   selector: 'app-layout',
