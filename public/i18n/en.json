@@ -1,0 +1,114 @@
+{
+  "NAV": {
+    "PLANTS": "Plants",
+    "SETTINGS": "Settings"
+  },
+  "THEME": {
+    "SWITCH_TO_LIGHT": "Switch to light mode",
+    "SWITCH_TO_DARK": "Switch to dark mode",
+    "TOGGLE_LABEL": "Toggle dark mode"
+  },
+  "PLANT_LIST": {
+    "TITLE": "My Plants",
+    "ADD_PLANT": "+ Add Plant",
+    "SEARCH_PLACEHOLDER": "Search plants...",
+    "SEARCH_LABEL": "Search plants",
+    "EMPTY_NO_PLANTS": "No plants yet.",
+    "EMPTY_ADD_FIRST": "Add your first plant",
+    "EMPTY_NO_MATCH": "No plants match your search.",
+    "DELETE": "Delete",
+    "DELETE_CONFIRM": "Delete \"{{name}}\"?"
+  },
+  "PLANT_DETAIL": {
+    "NOT_FOUND": "Plant not found.",
+    "BACK_TO_PLANTS": "Back to Plants",
+    "BACK": "Back",
+    "EDIT": "Edit",
+    "DELETE": "Delete",
+    "DELETE_CONFIRM": "Delete \"{{name}}\"? This cannot be undone.",
+    "SEARCH_LINK": "Search \"{{name}} plant care\"",
+    "CARE_SCHEDULE": "Care Schedule",
+    "NOTES": "Notes",
+    "LINKS": "Links",
+    "ADDED": "Added {{date}}",
+    "UPDATED": "Updated {{date}}",
+    "DONE_TODAY": "✓ Done today",
+    "LAST": "Last: {{date}}",
+    "NEVER_DONE": "Never done"
+  },
+  "PLANT_FORM": {
+    "TITLE_ADD": "Add Plant",
+    "TITLE_EDIT": "Edit Plant",
+    "BACK": "Back",
+    "NAME_LABEL": "Name",
+    "NAME_PLACEHOLDER": "e.g. Tomato",
+    "NAME_REQUIRED": "Name is required.",
+    "LOCATION_LABEL": "Planting Location",
+    "PHOTO_LABEL": "Photo",
+    "PHOTO_CHOOSE": "Choose file",
+    "PHOTO_TAKE": "Take photo",
+    "PHOTO_REMOVE": "Remove",
+    "PHOTO_PREVIEW_ALT": "Plant photo preview",
+    "CARE_SCHEDULE_LEGEND": "Care Schedule",
+    "CARE_SCHEDULE_HINT": "Set an interval and when you last did each task. The app will track what's due.",
+    "INTERVAL_LABEL": "Interval",
+    "INTERVAL_NOT_SET": "— not set —",
+    "LAST_DONE_LABEL": "Last done",
+    "LINKS_LABEL": "Links",
+    "LINK_PLACEHOLDER": "https://...",
+    "LINK_REMOVE": "Remove",
+    "LINK_ADD": "+ Add Link",
+    "NOTES_LABEL": "Notes",
+    "NOTES_PLACEHOLDER": "Any additional notes...",
+    "CANCEL": "Cancel",
+    "SAVE": "Add Plant",
+    "UPDATE": "Update Plant",
+    "SAVING": "Saving..."
+  },
+  "SETTINGS": {
+    "TITLE": "Settings",
+    "DARK_MODE_LABEL": "Dark Mode",
+    "DARK_MODE_DESCRIPTION": "Toggle between light and dark theme",
+    "TOGGLE_LABEL": "Toggle dark mode",
+    "DANGER_ZONE": "Danger Zone",
+    "CLEAR_DATA_LABEL": "Clear All Data",
+    "CLEAR_DATA_DESCRIPTION": "Permanently delete all plants from local storage",
+    "CLEAR_DATA_BTN": "Clear All",
+    "CLEAR_DATA_CONFIRM": "Delete all plant data? This cannot be undone.",
+    "CLEAR_DATA_SUCCESS": "All data cleared."
+  },
+  "LOCATION": {
+    "SUN": "Full Sun",
+    "PARTIAL_SUN": "Partial Sun",
+    "SHADE": "Shade"
+  },
+  "CARE_TASK": {
+    "WATERING": "Watering",
+    "PRUNING": "Pruning",
+    "FERTILIZING": "Fertilizing"
+  },
+  "CARE_INTERVAL": {
+    "DAILY": "Daily",
+    "EVERY_2_DAYS": "Every 2 days",
+    "EVERY_3_DAYS": "Every 3 days",
+    "WEEKLY": "Weekly",
+    "EVERY_2_WEEKS": "Every 2 weeks",
+    "MONTHLY": "Monthly",
+    "SEASONALLY": "Seasonally",
+    "YEARLY": "Yearly",
+    "AS_NEEDED": "As needed"
+  },
+  "STATUS": {
+    "OVERDUE": "Overdue",
+    "DUE_TODAY": "Due today",
+    "DUE_SOON": "Due soon"
+  },
+  "DUE": {
+    "OVERDUE": "{{days}}d overdue",
+    "TODAY": "Due today",
+    "IN_DAYS": "In {{days}}d",
+    "TASK_OVERDUE": "{{label}}: {{days}}d overdue",
+    "TASK_TODAY": "{{label}}: due today",
+    "TASK_IN_DAYS": "{{label}}: in {{days}}d"
+  }
+}

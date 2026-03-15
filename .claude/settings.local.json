@@ -2,10 +2,17 @@
   "permissions": {
     "allow": [
       "Bash(npm install:*)",
-      "Bash(npm run:*)"
+      "Bash(npm run:*)",
+      "Bash(find c:/Users/schulz/dvp/dvp-tmp/omm-plants -type f -name *.json -path */locale* -o -name *.json -path */i18n* -o -name *.xlf)",
+      "Bash(npm list:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npx ng:*)",
+      "Bash(find c:/Users/schulz/dvp/dvp-tmp/omm-plants/node_modules/@ngx-translate/http-loader -name *.d.ts)",
+      "Bash(npm audit:*)"
     ],
     "additionalDirectories": [
-      "C:\\Users\\schulz\\dvp\\dvp-tmp\\omm-plants\\src\\app"
+      "C:\\Users\\schulz\\dvp\\dvp-tmp\\omm-plants\\src\\app",
+      "c:\\Users\\schulz\\dvp\\dvp-tmp\\omm-plants\\public"
     ]
   }
 }

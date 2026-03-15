@@ -1,13 +1,26 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormArray, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { DbService } from '../../services/db.service';
-import { Plant, CARE_INTERVALS, CareTask } from '../../models/plant.model';
+import { Plant, CARE_INTERVALS, CareTask, CareInterval } from '../../models/plant.model';
+
+const INTERVAL_KEY_MAP: Record<CareInterval, string> = {
+  'daily':          'CARE_INTERVAL.DAILY',
+  'every-2-days':   'CARE_INTERVAL.EVERY_2_DAYS',
+  'every-3-days':   'CARE_INTERVAL.EVERY_3_DAYS',
+  'weekly':         'CARE_INTERVAL.WEEKLY',
+  'every-2-weeks':  'CARE_INTERVAL.EVERY_2_WEEKS',
+  'monthly':        'CARE_INTERVAL.MONTHLY',
+  'seasonally':     'CARE_INTERVAL.SEASONALLY',
+  'yearly':         'CARE_INTERVAL.YEARLY',
+  'as-needed':      'CARE_INTERVAL.AS_NEEDED',
+};
 
 @Component({
   selector: 'app-plant-form',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, TranslateModule],
   templateUrl: './plant-form.component.html',
   styleUrl: './plant-form.component.scss',
 })
@@ -21,7 +34,12 @@ export class PlantFormComponent implements OnInit {
   editId = signal<number | null>(null);
   submitting = signal(false);
 
-  readonly intervals = CARE_INTERVALS;
+  readonly intervals = CARE_INTERVALS.map(i => ({ value: i.value, labelKey: INTERVAL_KEY_MAP[i.value] }));
+  readonly careTasks = [
+    { key: 'watering',    labelKey: 'CARE_TASK.WATERING',    icon: '💧' },
+    { key: 'pruning',     labelKey: 'CARE_TASK.PRUNING',     icon: '✂️' },
+    { key: 'fertilizing', labelKey: 'CARE_TASK.FERTILIZING', icon: '🌱' },
+  ] as const;
   readonly today = new Date().toISOString().split('T')[0];
 
   form: FormGroup = this.fb.group({
@@ -77,6 +95,10 @@ export class PlantFormComponent implements OnInit {
 
   removeLink(index: number) {
     this.linksArray.removeAt(index);
+  }
+
+  removePhoto() {
+    this.form.patchValue({ photo: '' });
   }
 
   onPhotoChange(event: Event) {

@@ -1,25 +1,25 @@
 <div class="list-header">
-  <h1 class="page-title">My Plants</h1>
-  <a routerLink="/plants/new" class="btn-primary">+ Add Plant</a>
+  <h1 class="page-title">{{ 'PLANT_LIST.TITLE' | translate }}</h1>
+  <a routerLink="/plants/new" class="btn-primary">{{ 'PLANT_LIST.ADD_PLANT' | translate }}</a>
 </div>
 
 <div class="search-bar">
   <input
     type="search"
     class="input"
-    placeholder="Search plants..."
+    [placeholder]="'PLANT_LIST.SEARCH_PLACEHOLDER' | translate"
     [value]="searchQuery()"
     (input)="onSearchChange($any($event.target).value)"
-    aria-label="Search plants"
+    [attr.aria-label]="'PLANT_LIST.SEARCH_LABEL' | translate"
   />
 </div>
 
 @if (filteredPlants().length === 0) {
   <div class="empty-state">
     @if (plants().length === 0) {
-      <p>No plants yet. <a routerLink="/plants/new" class="link">Add your first plant</a>.</p>
+      <p>{{ 'PLANT_LIST.EMPTY_NO_PLANTS' | translate }} <a routerLink="/plants/new" class="link">{{ 'PLANT_LIST.EMPTY_ADD_FIRST' | translate }}</a>.</p>
     } @else {
-      <p>No plants match your search.</p>
+      <p>{{ 'PLANT_LIST.EMPTY_NO_MATCH' | translate }}</p>
     }
   </div>
 } @else {
@@ -49,7 +49,7 @@
           }
         </div>
         <div class="card-footer">
-          <button class="btn-destructive btn-sm" (click)="deleteCard($event, plant)">Delete</button>
+          <button class="btn-destructive btn-sm" (click)="deleteCard($event, plant)">{{ 'PLANT_LIST.DELETE' | translate }}</button>
         </div>
       </a>
     }

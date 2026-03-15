@@ -4,66 +4,76 @@
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M19 12H5M12 5l-7 7 7 7"/>
       </svg>
-      Back
+      {{ 'PLANT_FORM.BACK' | translate }}
     </a>
-    <h1 class="page-title">{{ isEdit() ? 'Edit Plant' : 'Add Plant' }}</h1>
+    <h1 class="page-title">{{ (isEdit() ? 'PLANT_FORM.TITLE_EDIT' : 'PLANT_FORM.TITLE_ADD') | translate }}</h1>
   </div>
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-card" novalidate>
 
     <div class="field">
-      <label class="label" for="name">Name <span class="required">*</span></label>
-      <input id="name" type="text" class="input" formControlName="name" placeholder="e.g. Tomato" />
+      <label class="label" for="name">{{ 'PLANT_FORM.NAME_LABEL' | translate }} <span class="required">*</span></label>
+      <input id="name" type="text" class="input" formControlName="name" [placeholder]="'PLANT_FORM.NAME_PLACEHOLDER' | translate" />
       @if (form.get('name')?.invalid && form.get('name')?.touched) {
-        <span class="error">Name is required.</span>
+        <span class="error">{{ 'PLANT_FORM.NAME_REQUIRED' | translate }}</span>
       }
     </div>
 
     <div class="field">
-      <label class="label" for="location">Planting Location</label>
+      <label class="label" for="location">{{ 'PLANT_FORM.LOCATION_LABEL' | translate }}</label>
       <select id="location" class="input" formControlName="plantingLocation">
-        <option value="sun">Full Sun</option>
-        <option value="partial-sun">Partial Sun</option>
-        <option value="shade">Shade</option>
+        <option value="sun">{{ 'LOCATION.SUN' | translate }}</option>
+        <option value="partial-sun">{{ 'LOCATION.PARTIAL_SUN' | translate }}</option>
+        <option value="shade">{{ 'LOCATION.SHADE' | translate }}</option>
       </select>
     </div>
 
     <div class="field">
-      <label class="label" for="photo">Photo</label>
-      <input id="photo" type="file" accept="image/*" class="input file-input" (change)="onPhotoChange($event)" />
+      <label class="label">{{ 'PLANT_FORM.PHOTO_LABEL' | translate }}</label>
+      <div class="photo-inputs">
+        <label class="btn-outline btn-sm photo-btn" for="photo">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="12" r="3"/></svg>
+          {{ 'PLANT_FORM.PHOTO_CHOOSE' | translate }}
+          <input id="photo" type="file" accept="image/*" class="sr-only" (change)="onPhotoChange($event)" />
+        </label>
+        <label class="btn-outline btn-sm photo-btn" for="photo-camera">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          {{ 'PLANT_FORM.PHOTO_TAKE' | translate }}
+          <input id="photo-camera" type="file" accept="image/*" capture="environment" class="sr-only" (change)="onPhotoChange($event)" />
+        </label>
+        @if (form.get('photo')?.value) {
+          <button type="button" class="btn-outline btn-sm photo-btn photo-btn-remove" (click)="removePhoto()">{{ 'PLANT_FORM.PHOTO_REMOVE' | translate }}</button>
+        }
+      </div>
       @if (form.get('photo')?.value) {
         <div class="photo-preview">
-          <img [src]="form.get('photo')?.value" alt="Plant photo preview" />
+          <img [src]="form.get('photo')?.value" [alt]="'PLANT_FORM.PHOTO_PREVIEW_ALT' | translate" />
         </div>
       }
     </div>
 
     <fieldset class="fieldset" formGroupName="careSchedule">
-      <legend class="legend">Care Schedule</legend>
-      <p class="fieldset-hint">Set an interval and when you last did each task. The app will track what's due.</p>
+      <legend class="legend">{{ 'PLANT_FORM.CARE_SCHEDULE_LEGEND' | translate }}</legend>
+      <p class="fieldset-hint">{{ 'PLANT_FORM.CARE_SCHEDULE_HINT' | translate }}</p>
 
-      @for (task of [
-        { key: 'watering', label: 'Watering', icon: '💧' },
-        { key: 'pruning', label: 'Pruning', icon: '✂️' },
-        { key: 'fertilizing', label: 'Fertilizing', icon: '🌱' }
-      ]; track task.key) {
+      @for (task of careTasks; track task.key) {
         <div class="care-row" [formGroupName]="task.key">
           <div class="care-row-label">
             <span class="care-icon">{{ task.icon }}</span>
-            <span class="label">{{ task.label }}</span>
+            <span class="label">{{ task.labelKey | translate }}</span>
           </div>
           <div class="care-row-inputs">
             <div class="field">
-              <label class="label-sm" [for]="task.key + '-interval'">Interval</label>
+              <label class="label-sm" [for]="task.key + '-interval'">{{ 'PLANT_FORM.INTERVAL_LABEL' | translate }}</label>
               <select [id]="task.key + '-interval'" class="input input-sm" formControlName="interval">
-                <option value="">— not set —</option>
+                <option value="">{{ 'PLANT_FORM.INTERVAL_NOT_SET' | translate }}</option>
                 @for (opt of intervals; track opt.value) {
-                  <option [value]="opt.value">{{ opt.label }}</option>
+                  <option [value]="opt.value">{{ opt.labelKey | translate }}</option>
                 }
               </select>
             </div>
             <div class="field">
-              <label class="label-sm" [for]="task.key + '-lastDone'">Last done</label>
+              <label class="label-sm" [for]="task.key + '-lastDone'">{{ 'PLANT_FORM.LAST_DONE_LABEL' | translate }}</label>
               <input [id]="task.key + '-lastDone'" type="date" class="input input-sm" formControlName="lastDone" [max]="today" />
             </div>
           </div>
@@ -72,25 +82,25 @@
     </fieldset>
 
     <div class="field">
-      <label class="label">Links</label>
+      <label class="label">{{ 'PLANT_FORM.LINKS_LABEL' | translate }}</label>
       @for (ctrl of linksArray.controls; track $index) {
         <div class="link-row">
-          <input type="url" class="input" [formControl]="$any(ctrl)" placeholder="https://..." />
-          <button type="button" class="btn-outline btn-sm" (click)="removeLink($index)">Remove</button>
+          <input type="url" class="input" [formControl]="$any(ctrl)" [placeholder]="'PLANT_FORM.LINK_PLACEHOLDER' | translate" />
+          <button type="button" class="btn-outline btn-sm" (click)="removeLink($index)">{{ 'PLANT_FORM.LINK_REMOVE' | translate }}</button>
         </div>
       }
-      <button type="button" class="btn-outline btn-sm add-link-btn" (click)="addLink()">+ Add Link</button>
+      <button type="button" class="btn-outline btn-sm add-link-btn" (click)="addLink()">{{ 'PLANT_FORM.LINK_ADD' | translate }}</button>
     </div>
 
     <div class="field">
-      <label class="label" for="notes">Notes</label>
-      <textarea id="notes" class="input textarea" formControlName="notes" rows="4" placeholder="Any additional notes..."></textarea>
+      <label class="label" for="notes">{{ 'PLANT_FORM.NOTES_LABEL' | translate }}</label>
+      <textarea id="notes" class="input textarea" formControlName="notes" rows="4" [placeholder]="'PLANT_FORM.NOTES_PLACEHOLDER' | translate"></textarea>
     </div>
 
     <div class="form-actions">
-      <a routerLink="/plants" class="btn-outline">Cancel</a>
+      <a routerLink="/plants" class="btn-outline">{{ 'PLANT_FORM.CANCEL' | translate }}</a>
       <button type="submit" class="btn-primary" [disabled]="submitting()">
-        {{ submitting() ? 'Saving...' : (isEdit() ? 'Update Plant' : 'Add Plant') }}
+        {{ submitting() ? ('PLANT_FORM.SAVING' | translate) : ((isEdit() ? 'PLANT_FORM.UPDATE' : 'PLANT_FORM.SAVE') | translate) }}
       </button>
     </div>
   </form>

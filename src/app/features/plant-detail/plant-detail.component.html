@@ -1,7 +1,7 @@
 @if (notFound()) {
   <div class="not-found">
-    <p>Plant not found.</p>
-    <a routerLink="/plants" class="btn-outline">Back to Plants</a>
+    <p>{{ 'PLANT_DETAIL.NOT_FOUND' | translate }}</p>
+    <a routerLink="/plants" class="btn-outline">{{ 'PLANT_DETAIL.BACK_TO_PLANTS' | translate }}</a>
   </div>
 } @else if (plant()) {
   <div class="detail-page">
@@ -10,11 +10,11 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M19 12H5M12 5l-7 7 7 7"/>
         </svg>
-        Back
+        {{ 'PLANT_DETAIL.BACK' | translate }}
       </a>
       <div class="header-actions">
-        <a [routerLink]="['/plants', plant()!.id, 'edit']" class="btn-outline">Edit</a>
-        <button class="btn-destructive" (click)="deleteplant()">Delete</button>
+        <a [routerLink]="['/plants', plant()!.id, 'edit']" class="btn-outline">{{ 'PLANT_DETAIL.EDIT' | translate }}</a>
+        <button class="btn-destructive" (click)="deleteplant()">{{ 'PLANT_DETAIL.DELETE' | translate }}</button>
       </div>
     </div>
 
@@ -34,22 +34,18 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
         </svg>
-        Search "{{ plant()!.name }} plant care"
+        {{ 'PLANT_DETAIL.SEARCH_LINK' | translate:{ name: plant()!.name } }}
       </a>
 
       <section class="section">
-        <h2 class="section-title">Care Schedule</h2>
+        <h2 class="section-title">{{ 'PLANT_DETAIL.CARE_SCHEDULE' | translate }}</h2>
         <div class="care-grid">
-          @for (task of [
-            { key: 'watering',    label: 'Watering',    icon: '💧' },
-            { key: 'pruning',     label: 'Pruning',     icon: '✂️' },
-            { key: 'fertilizing', label: 'Fertilizing', icon: '🌱' }
-          ]; track task.key) {
+          @for (task of careTasks; track task.key) {
             @let careTask = $any(plant()!.careSchedule)[task.key];
             <div class="care-card" [class]="'care-status-' + (taskStatus(careTask) ?? 'none')">
               <div class="care-card-header">
                 <span class="care-icon">{{ task.icon }}</span>
-                <span class="care-label">{{ task.label }}</span>
+                <span class="care-label">{{ task.labelKey | translate }}</span>
                 @if (taskStatus(careTask)) {
                   <span class="due-chip due-chip-{{ taskStatus(careTask) }}">{{ dueLabel(careTask) }}</span>
                 }
@@ -57,13 +53,13 @@
               <div class="care-card-body">
                 <span class="care-interval">{{ intervalLabel(careTask) }}</span>
                 @if (careTask.lastDone) {
-                  <span class="care-last">Last: {{ careTask.lastDone }}</span>
+                  <span class="care-last">{{ 'PLANT_DETAIL.LAST' | translate:{ date: careTask.lastDone } }}</span>
                 } @else if (careTask.interval && careTask.interval !== 'as-needed') {
-                  <span class="care-last care-never">Never done</span>
+                  <span class="care-last care-never">{{ 'PLANT_DETAIL.NEVER_DONE' | translate }}</span>
                 }
               </div>
               @if (careTask.interval && careTask.interval !== 'as-needed') {
-                <button class="btn-done" (click)="markDone($any(task.key))">✓ Done today</button>
+                <button class="btn-done" (click)="markDone($any(task.key))">{{ 'PLANT_DETAIL.DONE_TODAY' | translate }}</button>
               }
             </div>
           }
@@ -72,14 +68,14 @@
 
       @if (plant()!.notes) {
         <section class="section">
-          <h2 class="section-title">Notes</h2>
+          <h2 class="section-title">{{ 'PLANT_DETAIL.NOTES' | translate }}</h2>
           <p class="notes-text">{{ plant()!.notes }}</p>
         </section>
       }
 
       @if (plant()!.links.length > 0) {
         <section class="section">
-          <h2 class="section-title">Links</h2>
+          <h2 class="section-title">{{ 'PLANT_DETAIL.LINKS' | translate }}</h2>
           <ul class="links-list">
             @for (link of plant()!.links; track $index) {
               <li>
@@ -91,9 +87,9 @@
       }
 
       <section class="section meta-section">
-        <span class="meta">Added {{ formatDate(plant()!.createdAt) }}</span>
+        <span class="meta">{{ 'PLANT_DETAIL.ADDED' | translate:{ date: formatDate(plant()!.createdAt) } }}</span>
         @if (plant()!.updatedAt !== plant()!.createdAt) {
-          <span class="meta">Updated {{ formatDate(plant()!.updatedAt) }}</span>
+          <span class="meta">{{ 'PLANT_DETAIL.UPDATED' | translate:{ date: formatDate(plant()!.updatedAt) } }}</span>
         }
       </section>
     </div>
