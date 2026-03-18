@@ -1,0 +1,115 @@
+@use '../mixins' as m;
+
+@layer ui {
+  dialog {
+    background: transparent;
+    border: none;
+    padding: 0;
+    max-width: min(560px, 90vw);
+    width: 100%;
+    border-radius: var(--radius-xl);
+
+    // Entry animation
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+    transition:
+      opacity var(--transition-slow),
+      transform var(--transition-slow),
+      display var(--transition-slow) allow-discrete,
+      overlay var(--transition-slow) allow-discrete;
+
+    &[open] {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+
+      @starting-style {
+        opacity: 0;
+        transform: scale(0.96) translateY(8px);
+      }
+    }
+
+    &::backdrop {
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(2px);
+      opacity: 0;
+      transition:
+        opacity var(--transition-slow),
+        display var(--transition-slow) allow-discrete,
+        overlay var(--transition-slow) allow-discrete;
+    }
+
+    &[open]::backdrop {
+      opacity: 1;
+
+      @starting-style {
+        opacity: 0;
+      }
+    }
+  }
+
+  .dialog-surface {
+    background: var(--ui-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-xl);
+    overflow: hidden;
+  }
+
+  .dialog-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-4) var(--space-5);
+    border-bottom: 1px solid var(--border);
+    gap: var(--space-3);
+  }
+
+  .dialog-title {
+    font-size: var(--text-lg);
+    font-weight: var(--font-semibold);
+    line-height: var(--leading-tight);
+    color: var(--fg);
+  }
+
+  .close-btn {
+    @include m.interactive;
+    @include m.focus-ring;
+    @include m.flex-center;
+    background: none;
+    border: none;
+    color: var(--muted);
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-md);
+    flex-shrink: 0;
+    transition: background var(--transition-fast), color var(--transition-fast);
+
+    &:hover {
+      background: var(--color-neutral-100);
+      color: var(--fg);
+    }
+  }
+
+  [data-theme='dark'] .close-btn:hover {
+    background: var(--color-neutral-800);
+  }
+
+  .dialog-body {
+    padding: var(--space-5);
+  }
+
+  // Footer slot styling
+  ::ng-deep [slot='footer'] {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-5);
+    border-top: 1px solid var(--border);
+    background: var(--color-neutral-50);
+  }
+
+  [data-theme='dark'] ::ng-deep [slot='footer'] {
+    background: var(--color-neutral-900);
+  }
+}

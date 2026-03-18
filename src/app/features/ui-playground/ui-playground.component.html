@@ -1,0 +1,28 @@
+<div class="playground">
+  <!-- Sidebar nav -->
+  <nav class="sidebar" aria-label="Component sections">
+    <div class="sidebar-header">
+      <a routerLink="/" class="back-link">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+          <path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        App
+      </a>
+      <span class="sidebar-title">UI Library</span>
+    </div>
+    <ul class="sidebar-list">
+      @for (s of sections; track s.path) {
+        <li>
+          <a class="sidebar-link"
+             [routerLink]="s.path"
+             routerLinkActive="sidebar-link--active">{{ s.label }}</a>
+        </li>
+      }
+    </ul>
+  </nav>
+
+  <!-- Main content -->
+  <main class="content">
+    <router-outlet />
+  </main>
+</div>

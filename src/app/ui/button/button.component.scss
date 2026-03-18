@@ -1,0 +1,124 @@
+@use '../mixins' as m;
+
+@layer ui {
+  :host {
+    display: inline-flex;
+  }
+
+  button {
+    @include m.interactive;
+    @include m.focus-ring;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    font-family: inherit;
+    font-weight: var(--font-medium);
+    line-height: var(--leading-normal);
+    transition:
+      background var(--transition-base),
+      color var(--transition-base),
+      border-color var(--transition-base),
+      opacity var(--transition-base);
+    white-space: nowrap;
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  }
+
+  // ── Sizes ──────────────────────────────────────────────────────────────────
+
+  :host([data-size='sm']) button {
+    padding: var(--space-1) var(--space-3);
+    font-size: var(--text-xs);
+    border-radius: var(--radius-sm);
+  }
+
+  :host([data-size='md']) button {
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--text-sm);
+  }
+
+  :host([data-size='lg']) button {
+    padding: var(--space-3) var(--space-6);
+    font-size: var(--text-base);
+    border-radius: var(--radius-lg);
+  }
+
+  // ── Variants ───────────────────────────────────────────────────────────────
+
+  :host([data-variant='primary']) button {
+    background: var(--ui-primary-bg);
+    color: var(--ui-primary-fg);
+    border-color: var(--ui-primary-bg);
+
+    &:hover:not(:disabled) {
+      opacity: 0.85;
+    }
+  }
+
+  :host([data-variant='secondary']) button {
+    background: var(--color-neutral-100);
+    color: var(--color-neutral-700);
+    border-color: var(--color-neutral-200);
+
+    &:hover:not(:disabled) {
+      background: var(--color-neutral-200);
+    }
+  }
+
+  :host([data-variant='outline']) button {
+    background: transparent;
+    color: var(--fg);
+    border-color: var(--border);
+
+    &:hover:not(:disabled) {
+      background: var(--color-neutral-100);
+    }
+  }
+
+  :host([data-variant='ghost']) button {
+    background: transparent;
+    color: var(--fg);
+    border-color: transparent;
+
+    &:hover:not(:disabled) {
+      background: var(--color-neutral-100);
+    }
+  }
+
+  :host([data-variant='destructive']) button {
+    background: transparent;
+    color: var(--color-error);
+    border-color: var(--color-error);
+
+    &:hover:not(:disabled) {
+      background: var(--color-error);
+      color: #fff;
+    }
+  }
+
+  // Dark mode adjustments for secondary/outline/ghost
+  [data-theme='dark'] :host([data-variant='secondary']) button {
+    background: var(--color-neutral-800);
+    color: var(--color-neutral-200);
+    border-color: var(--color-neutral-700);
+
+    &:hover:not(:disabled) {
+      background: var(--color-neutral-700);
+    }
+  }
+
+  [data-theme='dark'] :host([data-variant='outline']) button,
+  [data-theme='dark'] :host([data-variant='ghost']) button {
+    &:hover:not(:disabled) {
+      background: var(--color-neutral-800);
+    }
+  }
+}

@@ -1,0 +1,68 @@
+@use '../mixins' as m;
+
+@layer ui {
+  :host {
+    display: inline-flex;
+  }
+
+  label {
+    @include m.interactive;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    color: var(--fg);
+  }
+
+  input[type='checkbox'] {
+    @include m.sr-only;
+  }
+
+  .box {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--ui-input-bg);
+    transition:
+      background var(--transition-base),
+      border-color var(--transition-base);
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      width: 9px;
+      height: 5px;
+      border-left: 2px solid transparent;
+      border-bottom: 2px solid transparent;
+      transform: rotate(-45deg) translateY(-1px);
+      transition: border-color var(--transition-fast);
+    }
+  }
+
+  // Checked state via host attribute
+  :host([data-checked='true']) .box {
+    background: var(--fg);
+    border-color: var(--fg);
+
+    &::after {
+      border-color: var(--bg);
+    }
+  }
+
+  // Focus-visible ring on the box when the hidden input is focused
+  input[type='checkbox']:focus-visible + .box {
+    outline: var(--focus-ring-width) solid var(--focus-ring-color);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  :host([data-disabled='true']) label {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}

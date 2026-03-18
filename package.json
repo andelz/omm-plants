@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port 2910",
+    "playground": "ng serve ui-playground",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "i18n:extract": "ngx-translate-extract --input ./src --output ./public/i18n/en.json ./public/i18n/de.json --sort --clean --format json",

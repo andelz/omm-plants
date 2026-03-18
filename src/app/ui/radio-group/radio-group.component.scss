@@ -1,0 +1,70 @@
+@use '../mixins' as m;
+
+@layer ui {
+  // RadioGroupComponent host
+  :host([role='radiogroup']) {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  :host([data-disabled='true']) {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  // RadioComponent host
+  app-radio {
+    display: flex;
+  }
+
+  label {
+    @include m.interactive;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    color: var(--fg);
+  }
+
+  input[type='radio'] {
+    @include m.sr-only;
+  }
+
+  .radio-dot {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 50%;
+    background: var(--ui-input-bg);
+    position: relative;
+    transition: border-color var(--transition-base);
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      border-radius: 50%;
+      background: transparent;
+      transition: background var(--transition-base);
+    }
+  }
+
+  input[type='radio']:checked + .radio-dot {
+    border-color: var(--fg);
+
+    &::after {
+      background: var(--fg);
+    }
+  }
+
+  input[type='radio']:focus-visible + .radio-dot {
+    outline: var(--focus-ring-width) solid var(--focus-ring-color);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  input[type='radio']:disabled + .radio-dot {
+    opacity: 0.5;
+  }
+}

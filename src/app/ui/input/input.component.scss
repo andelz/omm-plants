@@ -1,0 +1,120 @@
+@use '../mixins' as m;
+
+@layer ui {
+  :host {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .wrapper {
+    display: flex;
+    align-items: center;
+    background: var(--ui-input-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    transition: border-color var(--transition-base);
+    overflow: hidden;
+
+    &:hover:not(:has(input:disabled)) {
+      border-color: var(--fg);
+    }
+
+    &:focus-within {
+      outline: var(--focus-ring-width) solid var(--focus-ring-color);
+      outline-offset: var(--focus-ring-offset);
+      border-color: var(--fg);
+    }
+  }
+
+  input {
+    flex: 1;
+    min-width: 0;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: var(--space-2) var(--space-3);
+    color: var(--fg);
+    font-size: var(--text-sm);
+    font-family: inherit;
+    line-height: var(--leading-normal);
+
+    &::placeholder { color: var(--muted); }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    // Remove number input spinners
+    &[type='number'] {
+      appearance: textfield;
+      &::-webkit-inner-spin-button,
+      &::-webkit-outer-spin-button { display: none; }
+    }
+
+    // Remove search clear button
+    &[type='search']::-webkit-search-cancel-button { display: none; }
+  }
+
+  :host([data-invalid='true']) .wrapper {
+    border-color: var(--color-error);
+
+    &:focus-within {
+      outline-color: var(--color-error);
+      border-color: var(--color-error);
+    }
+  }
+
+  :host([data-disabled='true']) .wrapper {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .prefix,
+  .suffix {
+    display: contents; // transparent wrapper, slotted elements render inline
+  }
+
+  // When prefix/suffix content is projected, add padding
+  .prefix:not(:empty) {
+    display: flex;
+    align-items: center;
+    padding-left: var(--space-3);
+    color: var(--muted);
+    flex-shrink: 0;
+  }
+
+  .suffix {
+    display: flex;
+    align-items: center;
+    padding-right: var(--space-2);
+    gap: var(--space-1);
+    flex-shrink: 0;
+  }
+
+  .clear-btn {
+    @include m.interactive;
+    @include m.flex-center;
+    background: none;
+    border: none;
+    color: var(--muted);
+    padding: var(--space-1);
+    border-radius: var(--radius-sm);
+    transition: color var(--transition-fast), background var(--transition-fast);
+
+    &:hover {
+      color: var(--fg);
+      background: var(--color-neutral-100);
+    }
+  }
+
+  [data-theme='dark'] .clear-btn:hover {
+    background: var(--color-neutral-800);
+  }
+
+  .error-msg {
+    font-size: var(--text-xs);
+    color: var(--color-error);
+  }
+}

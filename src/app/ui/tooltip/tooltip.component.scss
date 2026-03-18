@@ -1,0 +1,118 @@
+@layer ui {
+  :host {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+
+    &:hover .tip,
+    &:focus-within .tip {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+
+  .tip {
+    position: absolute;
+    left: 50%;
+    z-index: 100;
+    background: var(--fg);
+    color: var(--bg);
+    font-size: var(--text-xs);
+    font-weight: var(--font-medium);
+    line-height: var(--leading-normal);
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-sm);
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity var(--transition-fast), transform var(--transition-fast);
+
+    // arrow via pseudo-element
+    &::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 5px solid transparent;
+    }
+  }
+
+  // ── Positions ──────────────────────────────────────────────────────────────
+
+  :host([data-position='top']) {
+    .tip {
+      bottom: calc(100% + 6px);
+      transform: translateX(-50%) translateY(4px);
+
+      &::before {
+        top: 100%;
+        border-top-color: var(--fg);
+      }
+    }
+
+    &:hover .tip,
+    &:focus-within .tip {
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+
+  :host([data-position='bottom']) {
+    .tip {
+      top: calc(100% + 6px);
+      transform: translateX(-50%) translateY(-4px);
+
+      &::before {
+        bottom: 100%;
+        border-bottom-color: var(--fg);
+      }
+    }
+
+    &:hover .tip,
+    &:focus-within .tip {
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+
+  :host([data-position='left']) {
+    .tip {
+      right: calc(100% + 6px);
+      left: auto;
+      top: 50%;
+      transform: translateY(-50%) translateX(4px);
+
+      &::before {
+        left: 100%;
+        top: 50%;
+        transform: translateY(-50%);
+        border-left-color: var(--fg);
+      }
+    }
+
+    &:hover .tip,
+    &:focus-within .tip {
+      transform: translateY(-50%) translateX(0);
+    }
+  }
+
+  :host([data-position='right']) {
+    .tip {
+      left: calc(100% + 6px);
+      top: 50%;
+      transform: translateY(-50%) translateX(-4px);
+
+      &::before {
+        right: 100%;
+        top: 50%;
+        left: auto;
+        transform: translateY(-50%);
+        border-right-color: var(--fg);
+      }
+    }
+
+    &:hover .tip,
+    &:focus-within .tip {
+      transform: translateY(-50%) translateX(0);
+    }
+  }
+}

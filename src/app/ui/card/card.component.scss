@@ -1,0 +1,47 @@
+@layer ui {
+  :host {
+    display: block;
+    background: var(--ui-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+  }
+
+  :host([data-padded='true']) .body {
+    padding: var(--space-4);
+  }
+
+  :host([data-interactive='true']) {
+    cursor: pointer;
+    transition: box-shadow var(--transition-base), transform var(--transition-base);
+
+    &:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-1px);
+    }
+
+    &:active {
+      transform: translateY(0);
+      box-shadow: var(--shadow-sm);
+    }
+  }
+
+  // Header/footer slots get padding by default
+  ::ng-deep [slot='header'] {
+    padding: var(--space-4);
+    border-bottom: 1px solid var(--border);
+    font-weight: var(--font-semibold);
+    font-size: var(--text-sm);
+  }
+
+  ::ng-deep [slot='footer'] {
+    padding: var(--space-3) var(--space-4);
+    border-top: 1px solid var(--border);
+    background: var(--color-neutral-50);
+  }
+
+  [data-theme='dark'] ::ng-deep [slot='footer'] {
+    background: var(--color-neutral-900);
+  }
+}

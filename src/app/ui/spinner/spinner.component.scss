@@ -1,0 +1,29 @@
+@use '../mixins' as m;
+
+@layer ui {
+  :host {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .track {
+    display: block;
+    border-radius: var(--radius-full);
+    border: 2px solid var(--border);
+    border-top-color: var(--fg);
+    animation: spin 0.7s linear infinite;
+  }
+
+  // sizes
+  :host([data-size='sm']) .track  { width: 14px; height: 14px; border-width: 2px; }
+  :host([data-size='md']) .track  { width: 20px; height: 20px; border-width: 2px; }
+  :host([data-size='lg']) .track  { width: 28px; height: 28px; border-width: 3px; }
+
+  .arc { display: none; } // semantic child, no visual role
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+}

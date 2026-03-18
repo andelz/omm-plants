@@ -1,40 +1,49 @@
-:root {
-  --bg: #ffffff;
-  --fg: #000000;
-  --muted: #6b7280;
-  --border: #e5e7eb;
-  --card-bg: #ffffff;
-  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  --input-bg: #ffffff;
-  --destructive: #ef4444;
-}
+// @use must come first in Sass
+@use './ui-tokens';
 
-[data-theme="dark"] {
-  --bg: #0a0a0a;
-  --fg: #fafafa;
-  --muted: #a1a1aa;
-  --border: #27272a;
-  --card-bg: #18181b;
-  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-  --input-bg: #27272a;
-  --destructive: #f87171;
-}
+// Declare cascade layer order: tokens < reset < ui < app
+// ui layer = component library; app layer = feature/page styles (always wins)
+@layer tokens, reset, ui, app;
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+@layer reset {
+  :root {
+    --bg: #ffffff;
+    --fg: #000000;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --card-bg: #ffffff;
+    --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --input-bg: #ffffff;
+    --destructive: #ef4444;
+  }
 
-body {
-  background: var(--bg);
-  color: var(--fg);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  [data-theme="dark"] {
+    --bg: #0a0a0a;
+    --fg: #fafafa;
+    --muted: #a1a1aa;
+    --border: #27272a;
+    --card-bg: #18181b;
+    --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    --input-bg: #27272a;
+    --destructive: #f87171;
+  }
 
-select option {
-  background: var(--input-bg);
-  color: var(--fg);
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  select option {
+    background: var(--input-bg);
+    color: var(--fg);
+  }
 }
