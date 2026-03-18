@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OmmPlants — Track your plants with care</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <span class="logo">OmmPlants</span>
+    <a href="#download" class="btn-nav">Get the app</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero-wrapper">
+  <div class="hero-bg" id="heroBg"></div>
+  <section class="hero">
+    <div class="hero-text">
+      <p class="eyebrow">Plant care, simplified</p>
+      <h1>Every leaf.<br /><em>Remembered.</em></h1>
+      <p class="sub">OmmPlants tracks watering, pruning and fertilising schedules for all your plants — beautifully minimal, no account needed.</p>
+      <a href="#download" class="btn-primary">Download free</a>
+    </div>
+    <div class="hero-visual">
+      <div class="phone-shell">
+        <div class="phone-screen">
+          <div class="mock-status">9:41</div>
+          <div class="mock-plant-card">
+            <div class="mock-plant-img"></div>
+            <div class="mock-plant-info">
+              <div class="mock-line wide"></div>
+              <div class="mock-line short"></div>
+            </div>
+          </div>
+          <div class="mock-plant-card">
+            <div class="mock-plant-img accent"></div>
+            <div class="mock-plant-info">
+              <div class="mock-line wide"></div>
+              <div class="mock-line short"></div>
+            </div>
+          </div>
+          <div class="mock-plant-card">
+            <div class="mock-plant-img dim"></div>
+            <div class="mock-plant-info">
+              <div class="mock-line wide"></div>
+              <div class="mock-line short"></div>
+            </div>
+          </div>
+          <div class="mock-fab"></div>
+        </div>
+      </div>
+      <div class="blob"></div>
+    </div>
+  </section>
+  </div>
+
+  <!-- FEATURES -->
+  <section class="features" id="features">
+    <div class="features-grid">
+      <div class="feature">
+        <span class="icon">◎</span>
+        <h3>Care schedules</h3>
+        <p>Set watering, pruning and fertilising intervals from daily to yearly. OmmPlants reminds you when it's time.</p>
+      </div>
+      <div class="feature">
+        <span class="icon">◑</span>
+        <h3>Light tracking</h3>
+        <p>Log each plant's preferred light condition — full sun, partial shade, or deep shadow.</p>
+      </div>
+      <div class="feature">
+        <span class="icon">◐</span>
+        <h3>Offline first</h3>
+        <p>Everything stays on your device. No cloud, no account, no data leaving your hands.</p>
+      </div>
+      <div class="feature">
+        <span class="icon">◒</span>
+        <h3>Dark & light</h3>
+        <p>A calm interface that adapts to your system theme. Easy on the eyes, day or night.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE / DIVIDER -->
+  <section class="quote">
+    <blockquote>
+      "The love of gardening is a seed once sown that never dies."
+      <cite>— Gertrude Jekyll</cite>
+    </blockquote>
+  </section>
+
+  <!-- VISUAL SHOWCASE -->
+  <section class="showcase">
+    <div class="showcase-inner">
+      <div class="showcase-text">
+        <h2>Everything your plants need, nothing they don't.</h2>
+        <p>Add a photo, pick a care rhythm, and let OmmPlants do the rest. No subscriptions. No noise.</p>
+      </div>
+      <div class="showcase-cards">
+        <div class="s-card dark">
+          <div class="s-card-leaf"></div>
+          <div class="s-card-tag">Watered · 2 days ago</div>
+          <div class="s-card-title">Monstera Deliciosa</div>
+        </div>
+        <div class="s-card light">
+          <div class="s-card-leaf green"></div>
+          <div class="s-card-tag muted">Fertilise · due today</div>
+          <div class="s-card-title dark-text">Ficus Lyrata</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOWNLOAD -->
+  <section class="download" id="download">
+    <h2>Start for free</h2>
+    <p>Available as a Progressive Web App — install directly from your browser on any device.</p>
+    <a href="#" class="btn-primary">Open OmmPlants</a>
+    <p class="disclaimer">Works on iOS, Android, macOS and Windows.</p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="logo">OmmPlants</span>
+    <p>Made with care for plants and their people.</p>
+  </footer>
+
+  <script>
+    // Nav: switch to light on scroll
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // Subtle parallax on hero bg
+    const bg = document.getElementById('heroBg');
+    if (bg && window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+      window.addEventListener('scroll', () => {
+        const y = window.scrollY;
+        if (y < window.innerHeight) {
+          bg.style.transform = `scale(1.04) translateY(${y * 0.25}px)`;
+        }
+      }, { passive: true });
+    }
+  </script>
+</body>
+</html>
