@@ -8,6 +8,7 @@ export interface CareTask {
 export interface Plant {
   id?: number;
   name: string;
+  location?: string; // free-text grouping label, e.g. "terasse"
   photo?: string; // base64
   plantingLocation: 'sun' | 'partial-sun' | 'shade';
   careSchedule: {

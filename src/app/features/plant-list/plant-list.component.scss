@@ -15,6 +15,21 @@
   margin-bottom: 1.5rem;
 }
 
+.location-group {
+  margin-bottom: 2rem;
+}
+
+.location-heading {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

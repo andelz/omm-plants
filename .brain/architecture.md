@@ -47,6 +47,7 @@ src/
 - **PWA:** `@angular/service-worker` registered after stable, ngsw-config.json at root
 - **UI lib:** Shared primitives live in `src/lib/ui/` (badge, button, card, icon, input, label, select, switch)
 - **Photos:** Stored as base64 strings in the `Plant.photo` field inside IndexedDB
+- **Location grouping:** `Plant.location` is an optional free-text string (e.g. "terasse"). Plant list groups by this field (alphabetical, unlabelled last). `PlantFormComponent` loads all existing location values on init and exposes them via a `<datalist>` for autocomplete. No DB migration needed — field is optional.
 
 ---
 

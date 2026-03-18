@@ -10,26 +10,20 @@
 
 ---
 
-## Active work
-
-_No active work tracked yet. Run `/wrap-up` after a session to populate._
-
----
-
-## Template format
-
-```markdown
-## Epic: <name>  [branch: <branch-name>]
+## Epic: Plant location grouping  [branch: master]
 
 ### Steps
-- [x] Step 1 — brief description
-- [~] Step 2 — in progress · depends on: Step 1
-- [ ] Step 3 — depends on: Step 2
-- [ ] Step 4 — depends on: Step 2  ← parallel with Step 3
+- [x] Add `location?: string` to `Plant` model
+- [x] Add `location` form control + text input to plant form
+- [x] Add `<datalist>` autocomplete sourced from existing plant locations
+- [x] Replace `filteredPlants` with `groupedPlants` computed signal in plant list
+- [x] Render grouped sections with headings in plant list HTML
+- [x] Add `.location-group` / `.location-heading` SCSS styles
+- [x] Add i18n keys (en + de)
+- [ ] End-to-end test (`ng serve --port 2910`)
+- [ ] Commit changes
 
-### Notes
-- Any important context
-```
+---
 
 ## Completed epics
 

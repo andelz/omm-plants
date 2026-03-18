@@ -33,6 +33,7 @@ export class PlantFormComponent implements OnInit {
   isEdit = signal(false);
   editId = signal<number | null>(null);
   submitting = signal(false);
+  locationSuggestions = signal<string[]>([]);
 
   readonly intervals = CARE_INTERVALS.map(i => ({ value: i.value, labelKey: INTERVAL_KEY_MAP[i.value] }));
   readonly careTasks = [
@@ -44,6 +45,7 @@ export class PlantFormComponent implements OnInit {
 
   form: FormGroup = this.fb.group({
     name: ['', Validators.required],
+    location: [''],
     plantingLocation: ['sun', Validators.required],
     photo: [''],
     careSchedule: this.fb.group({
@@ -67,6 +69,10 @@ export class PlantFormComponent implements OnInit {
   }
 
   async ngOnInit() {
+    const allPlants = await this.db.getAllPlants();
+    const locations = [...new Set(allPlants.map(p => p.location?.trim()).filter((l): l is string => !!l))];
+    this.locationSuggestions.set(locations);
+
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.isEdit.set(true);
@@ -75,6 +81,7 @@ export class PlantFormComponent implements OnInit {
       if (plant) {
         this.form.patchValue({
           name: plant.name,
+          location: plant.location ?? '',
           plantingLocation: plant.plantingLocation,
           photo: plant.photo ?? '',
           careSchedule: {
@@ -123,6 +130,7 @@ export class PlantFormComponent implements OnInit {
         const updated: Plant = {
           ...existing!,
           name: values.name,
+          location: values.location?.trim() || undefined,
           plantingLocation: values.plantingLocation,
           photo: values.photo || undefined,
           careSchedule: values.careSchedule,
@@ -134,6 +142,7 @@ export class PlantFormComponent implements OnInit {
       } else {
         const plant: Omit<Plant, 'id'> = {
           name: values.name,
+          location: values.location?.trim() || undefined,
           plantingLocation: values.plantingLocation,
           photo: values.photo || undefined,
           careSchedule: values.careSchedule,

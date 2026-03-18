@@ -19,10 +19,24 @@ export class PlantListComponent implements OnInit {
   plants = signal<Plant[]>([]);
   searchQuery = signal('');
 
-  filteredPlants = computed(() => {
+  groupedPlants = computed(() => {
     const q = this.searchQuery().toLowerCase().trim();
-    if (!q) return this.plants();
-    return this.plants().filter((p) => p.name.toLowerCase().includes(q));
+    const filtered = q
+      ? this.plants().filter((p) => p.name.toLowerCase().includes(q))
+      : this.plants();
+    const groups = new Map<string, Plant[]>();
+    for (const p of filtered) {
+      const key = p.location?.trim() || '';
+      if (!groups.has(key)) groups.set(key, []);
+      groups.get(key)!.push(p);
+    }
+    return [...groups.entries()]
+      .sort(([a], [b]) => {
+        if (a === '') return 1;
+        if (b === '') return -1;
+        return a.localeCompare(b);
+      })
+      .map(([label, plants]) => ({ label, plants }));
   });
 
   async ngOnInit() {

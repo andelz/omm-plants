@@ -20,6 +20,18 @@
     </div>
 
     <div class="field">
+      <label class="label" for="location-group">{{ 'plant_form.location_group_label' | translate }}</label>
+      <input id="location-group" type="text" class="input" formControlName="location"
+             [placeholder]="'plant_form.location_group_placeholder' | translate"
+             list="location-suggestions" autocomplete="off" />
+      <datalist id="location-suggestions">
+        @for (loc of locationSuggestions(); track loc) {
+          <option [value]="loc"></option>
+        }
+      </datalist>
+    </div>
+
+    <div class="field">
       <label class="label" for="location">{{ 'plant_form.location_label' | translate }}</label>
       <select id="location" class="input" formControlName="plantingLocation">
         <option value="sun">{{ 'location.sun' | translate }}</option>
