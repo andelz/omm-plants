@@ -27,6 +27,21 @@
     </div>
   </div>
 
+  <div class="settings-card premium-card" [class.premium-active]="premium.enabled()">
+    <div class="setting-row">
+      <div class="setting-info">
+        <span class="setting-label">
+          <span class="premium-badge">Premium</span>
+          {{ 'settings.premium_label' | translate }}
+        </span>
+        <span class="setting-description">{{ 'settings.premium_description' | translate }}</span>
+      </div>
+      <button class="toggle-btn" (click)="premium.toggle()" [class.active]="premium.enabled()" [attr.aria-label]="'settings.premium_toggle' | translate">
+        <span class="toggle-thumb"></span>
+      </button>
+    </div>
+  </div>
+
   <div class="settings-card danger-zone">
     <h2 class="danger-title">{{ 'settings.danger_zone' | translate }}</h2>
     <div class="setting-row">

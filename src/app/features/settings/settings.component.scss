@@ -49,6 +49,9 @@
   font-size: 0.9rem;
   font-weight: 500;
   color: var(--fg);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .setting-description {
@@ -96,6 +99,23 @@
   font-size: 0.875rem;
   cursor: pointer;
   flex-shrink: 0;
+}
+
+.premium-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  background: var(--primary);
+  color: #fff;
+  line-height: 1.2;
+}
+
+.premium-card.premium-active {
+  border-color: var(--primary);
 }
 
 .btn-destructive {

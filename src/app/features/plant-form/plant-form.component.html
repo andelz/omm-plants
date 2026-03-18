@@ -61,6 +61,28 @@
         <div class="photo-preview">
           <img [src]="form.get('photo')?.value" [alt]="'plant_form.photo_preview_alt' | translate" />
         </div>
+        @if (premium.enabled()) {
+          <button type="button" class="btn-outline btn-sm identify-btn" (click)="identifyPlant()" [disabled]="identifying()">
+            @if (identifying()) {
+              <span class="identify-spinner"></span>
+              {{ 'plant_form.identifying' | translate }}
+            } @else {
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              {{ 'plant_form.identify' | translate }}
+            }
+          </button>
+          @if (identificationResult(); as result) {
+            <span class="identify-result">{{ 'plant_form.identify_result' | translate:{ name: result.name, probability: result.probability } }}</span>
+          }
+          @if (identificationError(); as errorKey) {
+            <span class="identify-error">{{ errorKey | translate }}</span>
+          }
+        } @else {
+          <span class="identify-premium-hint">
+            <span class="premium-badge-sm">Premium</span>
+            {{ 'plant_form.identify_premium_hint' | translate }}
+          </span>
+        }
       }
     </div>
 

@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ThemeService } from '../../services/theme.service';
 import { DbService } from '../../services/db.service';
+import { PremiumService } from '../../services/premium.service';
 
 const LANG_KEY = 'app-lang';
 
@@ -19,6 +20,7 @@ export const LANGUAGES = [
 })
 export class SettingsComponent {
   theme = inject(ThemeService);
+  premium = inject(PremiumService);
   private db = inject(DbService);
   private translate = inject(TranslateService);
 
@@ -35,5 +37,6 @@ export class SettingsComponent {
     const msg = this.translate.instant('settings.clear_data_confirm');
     if (!window.confirm(msg)) return;
     await this.db.clearAll();
-    alert(this.translate.instant('settings.clear_data_success'));  }
+    alert(this.translate.instant('settings.clear_data_success'));
+  }
 }

@@ -39,6 +39,10 @@ testem.log
 /typings
 __screenshots__/
 
+# Proxy
+proxy/node_modules
+proxy/.env
+
 # System files
 .DS_Store
 Thumbs.db

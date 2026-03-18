@@ -4,6 +4,9 @@ import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { DbService } from '../../services/db.service';
 import { Plant, CARE_INTERVALS, CareTask, CareInterval } from '../../models/plant.model';
+import { PlantIdService, PlantIdResult, PlantIdError } from '../../services/plant-id.service';
+import { PremiumService } from '../../services/premium.service';
+import { resizeImage } from '../../utils/image-resize';
 
 const INTERVAL_KEY_MAP: Record<CareInterval, string> = {
   'daily':          'care_interval.daily',
@@ -29,11 +32,16 @@ export class PlantFormComponent implements OnInit {
   private db = inject(DbService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
+  plantId = inject(PlantIdService);
+  premium = inject(PremiumService);
 
   isEdit = signal(false);
   editId = signal<number | null>(null);
   submitting = signal(false);
   locationSuggestions = signal<string[]>([]);
+  identifying = signal(false);
+  identificationResult = signal<PlantIdResult | null>(null);
+  identificationError = signal<string | null>(null);
 
   readonly intervals = CARE_INTERVALS.map(i => ({ value: i.value, labelKey: INTERVAL_KEY_MAP[i.value] }));
   readonly careTasks = [
@@ -106,6 +114,35 @@ export class PlantFormComponent implements OnInit {
 
   removePhoto() {
     this.form.patchValue({ photo: '' });
+    this.identificationResult.set(null);
+    this.identificationError.set(null);
+  }
+
+  async identifyPlant() {
+    const photo = this.form.get('photo')?.value;
+    if (!photo || this.identifying()) return;
+
+    this.identifying.set(true);
+    this.identificationResult.set(null);
+    this.identificationError.set(null);
+
+    try {
+      const resized = await resizeImage(photo);
+      const result = await this.plantId.identify(resized);
+      this.identificationResult.set(result);
+      const displayName = result.commonNames.length > 0 ? result.commonNames[0] : result.name;
+      this.form.patchValue({ name: displayName });
+    } catch (err) {
+      const errorKey = typeof err === 'string' ? err : 'unknown';
+      const errorMap: Record<string, string> = {
+        'offline': 'plant_form.identify_error_offline',
+        'no-result': 'plant_form.identify_error_generic',
+        'unknown': 'plant_form.identify_error_generic',
+      };
+      this.identificationError.set(errorMap[errorKey] ?? 'plant_form.identify_error_generic');
+    } finally {
+      this.identifying.set(false);
+    }
   }
 
   onPhotoChange(event: Event) {
