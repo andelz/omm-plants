@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { InputComponent } from '../../../ui/input/input.component';
+import { InputComponent } from '@ui';
 
 @Component({
   selector: 'app-input-section',
@@ -65,5 +65,11 @@ import { InputComponent } from '../../../ui/input/input.component';
       </details>
     </section>
   `,
+  styles: `
+    .pg-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }`
 })
 export class InputSectionComponent {}

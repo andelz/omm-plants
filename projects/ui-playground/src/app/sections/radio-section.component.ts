@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RadioGroupComponent, RadioComponent } from '../../../ui/radio-group/radio-group.component';
+import { RadioGroupComponent, RadioComponent } from '@ui';
 
 @Component({
   selector: 'app-radio-section',
@@ -43,6 +43,12 @@ import { RadioGroupComponent, RadioComponent } from '../../../ui/radio-group/rad
       </details>
     </section>
   `,
+  styles: `
+    .pg-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }`,
 })
 export class RadioSectionComponent {
   selected = signal('partial');

@@ -46,6 +46,7 @@
 	"plant_form.last_done_label": "Zuletzt erledigt",
 	"plant_form.link_add": "+ Link hinzufügen",
 	"plant_form.link_placeholder": "https://...",
+	"plant_form.link_title_placeholder": "Titel (optional)",
 	"plant_form.link_remove": "Entfernen",
 	"plant_form.links_label": "Links",
 	"plant_form.location_group_label": "Standortbezeichnung",

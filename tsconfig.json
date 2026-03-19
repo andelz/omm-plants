@@ -16,8 +16,8 @@
     "module": "preserve",
     "baseUrl": ".",
     "paths": {
-      "@ui": ["src/app/ui/index.ts"],
-      "@ui/*": ["src/app/ui/*"]
+      "@ui": ["./dist/ui"],
+      "@ui/*": ["./dist/ui/*"]
     }
   },
   "angularCompilerOptions": {
@@ -33,6 +33,12 @@
     },
     {
       "path": "./tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ui/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/ui/tsconfig.spec.json"
     }
   ]
 }

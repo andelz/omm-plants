@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { openDB, DBSchema, IDBPDatabase } from 'idb';
-import { Plant, CareTask } from '../models/plant.model';
+import { Plant, CareTask, LinkEntry } from '../models/plant.model';
 
 interface PlantsDB extends DBSchema {
   plants: {
@@ -13,9 +13,18 @@ function emptyCareTask(): CareTask {
   return { interval: '', lastDone: null };
 }
 
-/** Migrate records that may have old string-based careSchedule fields. */
+/** Migrate a plain URL string to a LinkEntry object. */
+function migrateLink(link: string | LinkEntry): LinkEntry {
+  if (typeof link === 'string') {
+    return { url: link, addedAt: new Date().toISOString().split('T')[0] };
+  }
+  return link;
+}
+
+/** Migrate records that may have old string-based careSchedule fields or plain link strings. */
 function migratePlant(raw: any): Plant {
   const cs = raw.careSchedule ?? {};
+  const links: (string | LinkEntry)[] = raw.links ?? [];
   return {
     ...raw,
     careSchedule: {
@@ -23,6 +32,7 @@ function migratePlant(raw: any): Plant {
       pruning:     typeof cs.pruning     === 'object' ? cs.pruning     : emptyCareTask(),
       fertilizing: typeof cs.fertilizing === 'object' ? cs.fertilizing : emptyCareTask(),
     },
+    links: links.map(migrateLink),
   };
 }
 
@@ -31,14 +41,26 @@ export class DbService {
   private dbPromise: Promise<IDBPDatabase<PlantsDB>>;
 
   constructor() {
-    this.dbPromise = openDB<PlantsDB>('plants-db', 2, {
+    this.dbPromise = openDB<PlantsDB>('plants-db', 3, {
       upgrade(db, oldVersion) {
         if (oldVersion < 1) {
           db.createObjectStore('plants', { keyPath: 'id', autoIncrement: true });
         }
         // v2: careSchedule fields changed from string to CareTask — migrated at read time
+        // v3: links changed from string[] to LinkEntry[] — migrated at read time
       },
     });
+    this.requestPersistentStorage();
+  }
+
+  /** Request persistent storage so the browser never auto-evicts our IndexedDB data. */
+  private async requestPersistentStorage(): Promise<void> {
+    if (navigator.storage?.persist) {
+      const granted = await navigator.storage.persist();
+      if (!granted) {
+        console.warn('Persistent storage not granted — data may be evicted under storage pressure');
+      }
+    }
   }
 
   async getAllPlants(): Promise<Plant[]> {

@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { TextareaComponent } from '../../../ui/textarea/textarea.component';
+import { TextareaComponent } from '@ui';
 
 @Component({
   selector: 'app-textarea-section',
@@ -32,5 +32,11 @@ import { TextareaComponent } from '../../../ui/textarea/textarea.component';
       </details>
     </section>
   `,
+  styles: `
+    .pg-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }`,
 })
 export class TextareaSectionComponent {}

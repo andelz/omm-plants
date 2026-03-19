@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ToggleComponent } from '../../../ui/toggle/toggle.component';
+import { ToggleComponent } from '@ui';
 
 @Component({
   selector: 'app-toggle-section',
@@ -38,6 +38,12 @@ import { ToggleComponent } from '../../../ui/toggle/toggle.component';
       </details>
     </section>
   `,
+  styles: `
+    .pg-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }`,
 })
 export class ToggleSectionComponent {
   darkEnabled = signal(false);

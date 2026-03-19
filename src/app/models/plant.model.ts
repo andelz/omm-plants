@@ -5,6 +5,12 @@ export interface CareTask {
   lastDone: string | null; // ISO date string (YYYY-MM-DD)
 }
 
+export interface LinkEntry {
+  url: string;
+  title?: string;
+  addedAt: string; // ISO date string (YYYY-MM-DD)
+}
+
 export interface Plant {
   id?: number;
   name: string;
@@ -16,7 +22,7 @@ export interface Plant {
     pruning: CareTask;
     fertilizing: CareTask;
   };
-  links: string[];
+  links: LinkEntry[];
   notes: string;
   createdAt: Date;
   updatedAt: Date;

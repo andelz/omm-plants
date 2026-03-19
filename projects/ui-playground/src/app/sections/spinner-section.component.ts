@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { SpinnerComponent } from '../../../ui/spinner/spinner.component';
+import { SpinnerComponent } from '@ui';
 
 @Component({
   selector: 'app-spinner-section',
@@ -27,5 +27,11 @@ import { SpinnerComponent } from '../../../ui/spinner/spinner.component';
       </details>
     </section>
   `,
+  styles: `
+    .pg-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }`,
 })
 export class SpinnerSectionComponent {}

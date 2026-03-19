@@ -1,7 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { CardComponent } from '../../../ui/card/card.component';
-import { ButtonComponent } from '../../../ui/button/button.component';
-import { BadgeComponent } from '../../../ui/badge/badge.component';
+import { CardComponent, ButtonComponent, BadgeComponent } from '@ui';
 
 @Component({
   selector: 'app-card-section',
@@ -58,5 +56,11 @@ import { BadgeComponent } from '../../../ui/badge/badge.component';
       </details>
     </section>
   `,
+  styles: `
+    .pg-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }`,
 })
 export class CardSectionComponent {}

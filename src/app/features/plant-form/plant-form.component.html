@@ -115,11 +115,12 @@
       }
     </fieldset>
 
-    <div class="field">
+    <div class="field" formArrayName="links">
       <label class="label">{{ 'plant_form.links_label' | translate }}</label>
       @for (ctrl of linksArray.controls; track $index) {
-        <div class="link-row">
-          <input type="url" class="input" [formControl]="$any(ctrl)" [placeholder]="'plant_form.link_placeholder' | translate" />
+        <div class="link-row" [formGroupName]="$index">
+          <input type="url" class="input" formControlName="url" [placeholder]="'plant_form.link_placeholder' | translate" />
+          <input type="text" class="input input-sm" formControlName="title" [placeholder]="'plant_form.link_title_placeholder' | translate" />
           <button type="button" class="btn-outline btn-sm" (click)="removeLink($index)">{{ 'plant_form.link_remove' | translate }}</button>
         </div>
       }

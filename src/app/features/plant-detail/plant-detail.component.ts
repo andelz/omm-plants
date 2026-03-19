@@ -107,4 +107,25 @@ export class PlantDetailComponent implements OnInit {
   searchUrl(name: string): string {
     return `https://www.google.com/search?q=${encodeURIComponent(name + ' plant care')}`;
   }
+
+  faviconUrl(url: string): string {
+    try {
+      const host = new URL(url).hostname;
+      return `https://www.google.com/s2/favicons?domain=${host}&sz=32`;
+    } catch {
+      return '';
+    }
+  }
+
+  domainOf(url: string): string {
+    try {
+      return new URL(url).hostname.replace(/^www\./, '');
+    } catch {
+      return url;
+    }
+  }
+
+  formatLinkDate(iso: string): string {
+    return new Date(iso).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+  }
 }

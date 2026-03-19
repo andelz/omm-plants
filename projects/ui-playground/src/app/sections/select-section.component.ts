@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { SelectComponent } from '../../../ui/select/select.component';
+import { SelectComponent } from '@ui';
 
 @Component({
   selector: 'app-select-section',
@@ -43,5 +43,11 @@ import { SelectComponent } from '../../../ui/select/select.component';
       </details>
     </section>
   `,
+  styles: `
+    .pg-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }`,
 })
 export class SelectSectionComponent {}

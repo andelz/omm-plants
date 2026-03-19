@@ -3,7 +3,7 @@ import { ReactiveFormsModule, FormBuilder, FormArray, Validators, FormGroup } fr
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { DbService } from '../../services/db.service';
-import { Plant, CARE_INTERVALS, CareTask, CareInterval } from '../../models/plant.model';
+import { Plant, CARE_INTERVALS, CareTask, CareInterval, LinkEntry } from '../../models/plant.model';
 import { PlantIdService, PlantIdResult, PlantIdError } from '../../services/plant-id.service';
 import { PremiumService } from '../../services/premium.service';
 import { resizeImage } from '../../utils/image-resize';
@@ -99,13 +99,21 @@ export class PlantFormComponent implements OnInit {
           },
           notes: plant.notes,
         });
-        plant.links.forEach(link => this.linksArray.push(this.fb.control(link)));
+        plant.links.forEach(link => this.linksArray.push(this.buildLinkGroup(link)));
       }
     }
   }
 
+  private buildLinkGroup(link?: LinkEntry): FormGroup {
+    return this.fb.group({
+      url: [link?.url ?? ''],
+      title: [link?.title ?? ''],
+      addedAt: [link?.addedAt ?? new Date().toISOString().split('T')[0]],
+    });
+  }
+
   addLink() {
-    this.linksArray.push(this.fb.control(''));
+    this.linksArray.push(this.buildLinkGroup());
   }
 
   removeLink(index: number) {
@@ -172,7 +180,7 @@ export class PlantFormComponent implements OnInit {
           photo: values.photo || undefined,
           careSchedule: values.careSchedule,
           notes: values.notes,
-          links: values.links.filter((l: string) => l.trim()),
+          links: values.links.filter((l: LinkEntry) => l.url.trim()),
           updatedAt: now,
         };
         await this.db.updatePlant(updated);
@@ -184,7 +192,7 @@ export class PlantFormComponent implements OnInit {
           photo: values.photo || undefined,
           careSchedule: values.careSchedule,
           notes: values.notes,
-          links: values.links.filter((l: string) => l.trim()),
+          links: values.links.filter((l: LinkEntry) => l.url.trim()),
           createdAt: now,
           updatedAt: now,
         };

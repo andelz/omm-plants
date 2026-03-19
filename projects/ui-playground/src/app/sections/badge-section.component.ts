@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { BadgeComponent } from '../../../ui/badge/badge.component';
+import { BadgeComponent } from '@ui';
 
 @Component({
   selector: 'app-badge-section',
@@ -30,5 +30,11 @@ import { BadgeComponent } from '../../../ui/badge/badge.component';
       </details>
     </section>
   `,
+  styles: `
+    .pg-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }`,
 })
 export class BadgeSectionComponent {}

@@ -39,9 +39,4 @@ export const routes: Routes = [
       },
     ],
   },
-  {
-    path: 'playground',
-    loadChildren: () =>
-      import('./features/ui-playground/playground.routes').then(m => m.playgroundRoutes),
-  },
 ];

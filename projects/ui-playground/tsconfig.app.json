@@ -2,16 +2,10 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "../../out-tsc/ui-playground",
-    "types": [],
-    "paths": {
-      "@ui": ["../../src/app/ui/index.ts"],
-      "@ui/*": ["../../src/app/ui/*"]
-    }
+    "types": []
   },
   "include": [
     "src/**/*.ts",
-    "../../src/app/ui/**/*.ts",
-    "../../src/app/features/ui-playground/**/*.ts",
     "../../src/app/services/theme.service.ts"
   ],
   "exclude": [

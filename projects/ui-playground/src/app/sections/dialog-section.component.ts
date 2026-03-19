@@ -1,12 +1,17 @@
 import { Component, ChangeDetectionStrategy, viewChild } from '@angular/core';
-import { DialogComponent } from '../../../ui/dialog/dialog.component';
-import { ButtonComponent } from '../../../ui/button/button.component';
+import { DialogComponent, ButtonComponent } from '@ui';
 
 @Component({
   selector: 'app-dialog-section',
   standalone: true,
   imports: [DialogComponent, ButtonComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  styles: `
+    .pg-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }`,
   template: `
     <section id="dialog" class="pg-section">
       <h2 class="pg-section-title">Dialog</h2>

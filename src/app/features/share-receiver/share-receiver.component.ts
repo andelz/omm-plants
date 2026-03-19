@@ -50,8 +50,12 @@ export class ShareReceiverComponent implements OnInit {
     if (this.saving()) return;
     this.saving.set(true);
     const url = this.sharedUrl();
-    if (!plant.links.includes(url)) {
-      plant.links.push(url);
+    if (!plant.links.some(l => l.url === url)) {
+      plant.links.push({
+        url,
+        title: this.sharedTitle() !== url ? this.sharedTitle() : undefined,
+        addedAt: new Date().toISOString().split('T')[0],
+      });
     }
     plant.updatedAt = new Date();
     await this.db.updatePlant(plant);

@@ -1,11 +1,17 @@
 import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
-import { ButtonComponent } from '../../../ui/button/button.component';
+import { ButtonComponent } from '@ui';
 
 @Component({
   selector: 'app-button-section',
   standalone: true,
   imports: [ButtonComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  styles: `
+    .pg-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }`,
   template: `
     <section id="button" class="pg-section">
       <h2 class="pg-section-title">Button</h2>

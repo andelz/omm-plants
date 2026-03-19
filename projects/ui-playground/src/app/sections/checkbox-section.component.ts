@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CheckboxComponent } from '../../../ui/checkbox/checkbox.component';
+import { CheckboxComponent } from '@ui';
 
 @Component({
   selector: 'app-checkbox-section',
@@ -41,6 +41,12 @@ import { CheckboxComponent } from '../../../ui/checkbox/checkbox.component';
       </details>
     </section>
   `,
+  styles: `
+    .pg-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }`,
 })
 export class CheckboxSectionComponent {
   agreed = signal(false);

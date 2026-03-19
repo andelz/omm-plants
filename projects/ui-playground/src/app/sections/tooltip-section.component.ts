@@ -1,6 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { TooltipComponent } from '../../../ui/tooltip/tooltip.component';
-import { ButtonComponent } from '../../../ui/button/button.component';
+import { TooltipComponent, ButtonComponent } from '@ui';
 
 @Component({
   selector: 'app-tooltip-section',
@@ -37,5 +36,11 @@ import { ButtonComponent } from '../../../ui/button/button.component';
       </details>
     </section>
   `,
+  styles: `
+    .pg-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }`,
 })
 export class TooltipSectionComponent {}
