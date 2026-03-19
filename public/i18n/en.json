@@ -104,5 +104,12 @@
 	"update.message": "A new version is available.",
 	"update.reload": "Reload",
 	"theme.switch_to_light": "Switch to light mode",
-	"theme.toggle_label": "Toggle dark mode"
+	"theme.toggle_label": "Toggle dark mode",
+	"share.title": "Add Link to Plant",
+	"share.shared_url": "Shared link",
+	"share.select_plant": "Select a plant",
+	"share.search_placeholder": "Search plants…",
+	"share.no_plants": "No plants yet.",
+	"share.create_plant": "Create one first",
+	"share.cancel": "Cancel"
 }

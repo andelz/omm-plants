@@ -104,5 +104,12 @@
 	"update.message": "Eine neue Version ist verfügbar.",
 	"update.reload": "Neu laden",
 	"theme.switch_to_light": "Zum hellen Modus wechseln",
-	"theme.toggle_label": "Dunklen Modus umschalten"
+	"theme.toggle_label": "Dunklen Modus umschalten",
+	"share.title": "Link zur Pflanze hinzufügen",
+	"share.shared_url": "Geteilter Link",
+	"share.select_plant": "Wähle eine Pflanze",
+	"share.search_placeholder": "Pflanzen suchen…",
+	"share.no_plants": "Noch keine Pflanzen.",
+	"share.create_plant": "Erstelle zuerst eine",
+	"share.cancel": "Abbrechen"
 }

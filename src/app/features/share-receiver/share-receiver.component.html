@@ -1,0 +1,53 @@
+<div class="share-header">
+  <h1 class="page-title">{{ 'share.title' | translate }}</h1>
+  <a routerLink="/plants" class="btn-cancel">{{ 'share.cancel' | translate }}</a>
+</div>
+
+<div class="shared-url-preview">
+  <span class="shared-url-label">{{ 'share.shared_url' | translate }}</span>
+  <span class="shared-url-value" [title]="sharedUrl()">{{ sharedTitle() }}</span>
+</div>
+
+<p class="select-hint">{{ 'share.select_plant' | translate }}</p>
+
+<div class="search-bar">
+  <input
+    type="search"
+    class="input"
+    [placeholder]="'share.search_placeholder' | translate"
+    [value]="searchQuery()"
+    (input)="onSearchChange($any($event.target).value)"
+  />
+</div>
+
+@if (plants().length === 0) {
+  <div class="empty-state">
+    <p>{{ 'share.no_plants' | translate }} <a routerLink="/plants/new" class="link">{{ 'share.create_plant' | translate }}</a></p>
+  </div>
+} @else if (filteredPlants().length === 0) {
+  <div class="empty-state">
+    <p>{{ 'plant_list.empty_no_match' | translate }}</p>
+  </div>
+} @else {
+  <div class="plant-picker">
+    @for (plant of filteredPlants(); track plant.id) {
+      <button
+        class="plant-card"
+        [disabled]="saving()"
+        (click)="selectPlant(plant)"
+      >
+        @if (plant.photo) {
+          <img class="plant-card-photo" [src]="plant.photo" [alt]="plant.name" />
+        } @else {
+          <div class="plant-card-photo plant-card-photo--empty"></div>
+        }
+        <div class="plant-card-info">
+          <span class="plant-card-name">{{ plant.name }}</span>
+          @if (plant.location) {
+            <span class="plant-card-location">{{ plant.location }}</span>
+          }
+        </div>
+      </button>
+    }
+  </div>
+}

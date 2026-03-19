@@ -32,6 +32,11 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./features/settings/settings.component').then(m => m.SettingsComponent),
       },
+      {
+        path: 'share',
+        loadComponent: () =>
+          import('./features/share-receiver/share-receiver.component').then(m => m.ShareReceiverComponent),
+      },
     ],
   },
   {
