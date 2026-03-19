@@ -50,3 +50,55 @@
     color: var(--fg);
   }
 }
+
+/* ── View Transitions ──────────────────────────────────────────────────────── */
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 200ms;
+  animation-timing-function: ease;
+}
+
+/* Directional slide: forward (list → detail) */
+.nav-forward::view-transition-old(root) {
+  animation-name: vt-slide-out-left;
+}
+.nav-forward::view-transition-new(root) {
+  animation-name: vt-slide-in-right;
+}
+
+/* Directional slide: back (detail → list) */
+.nav-back::view-transition-old(root) {
+  animation-name: vt-slide-out-right;
+}
+.nav-back::view-transition-new(root) {
+  animation-name: vt-slide-in-left;
+}
+
+@keyframes vt-slide-out-left {
+  to { opacity: 0; transform: translateX(-25%); }
+}
+@keyframes vt-slide-in-right {
+  from { opacity: 0; transform: translateX(25%); }
+}
+@keyframes vt-slide-out-right {
+  to { opacity: 0; transform: translateX(25%); }
+}
+@keyframes vt-slide-in-left {
+  from { opacity: 0; transform: translateX(-25%); }
+}
+
+/* Shared-element photo morph */
+::view-transition-group(plant-photo) {
+  animation-duration: 250ms;
+  animation-timing-function: ease;
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root),
+  ::view-transition-group(plant-photo) {
+    animation-duration: 0.01ms !important;
+  }
+}

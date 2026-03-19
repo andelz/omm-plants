@@ -34,7 +34,7 @@
           <a [routerLink]="['/plants', plant.id]" class="card">
             @if (plant.photo) {
               <div class="card-photo">
-                <img [src]="plant.photo" [alt]="plant.name" />
+                <img [src]="plant.photo" [alt]="plant.name" [style.view-transition-name]="'plant-photo-' + plant.id" />
               </div>
             }
             <div class="card-body">

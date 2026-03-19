@@ -20,7 +20,7 @@
 
     @if (plant()!.photo) {
       <div class="plant-photo">
-        <img [src]="plant()!.photo" [alt]="plant()!.name" />
+        <img [src]="plant()!.photo" [alt]="plant()!.name" [style.view-transition-name]="'plant-photo-' + plant()!.id" />
       </div>
     }
 
