@@ -7,7 +7,7 @@
   "theme_color": "#262626",
   "icons": [
     {
-      "src": "/leaf.svg",
+      "src": "/leaf-maskable.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"
