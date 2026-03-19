@@ -31,12 +31,25 @@
     </div>
 
     <div class="field">
-      <label class="label" for="location">{{ 'plant_form.location_label' | translate }}</label>
-      <app-select formControlName="plantingLocation">
-        <option value="sun">{{ 'location.sun' | translate }}</option>
-        <option value="partial-sun">{{ 'location.partial_sun' | translate }}</option>
-        <option value="shade">{{ 'location.shade' | translate }}</option>
-      </app-select>
+      <span class="label" id="planting-location-label">{{ 'plant_form.location_label' | translate }}</span>
+      <div class="location-radio-group"
+           role="radiogroup"
+           aria-labelledby="planting-location-label"
+           (keydown)="onLocationKeydown($event)">
+        @for (opt of locationOptions; track opt.value) {
+          <button type="button"
+                  class="location-option"
+                  [class.selected]="form.get('plantingLocation')?.value === opt.value"
+                  role="radio"
+                  [attr.aria-checked]="form.get('plantingLocation')?.value === opt.value"
+                  [attr.aria-label]="opt.labelKey | translate"
+                  [tabindex]="form.get('plantingLocation')?.value === opt.value ? 0 : -1"
+                  (click)="selectLocation(opt.value)">
+            <app-planting-location-icon [location]="opt.value" [size]="24" />
+            <span class="location-label">{{ opt.labelKey | translate }}</span>
+          </button>
+        }
+      </div>
     </div>
 
     <div class="field">

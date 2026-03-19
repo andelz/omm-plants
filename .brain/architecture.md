@@ -33,6 +33,7 @@ src/
       share-receiver/      — Web Share Target plant picker (receives shared URLs, lets user pick a plant)
     components/
       layout/              — LayoutComponent (shell/nav wrapper)
+      planting-location-icon/ — PlantingLocationIconComponent (SVG icon for sun/partial-sun/shade)
 projects/
   ui/                      — @ui component library (ng-packagr), built to dist/ui/
   ui-playground/           — standalone showcase app for @ui components

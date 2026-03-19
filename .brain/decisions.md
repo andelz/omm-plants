@@ -58,4 +58,12 @@ Architectural decisions and rationale. Each entry: **date · decision · why**.
 
 ---
 
+## ADR-008 · Icon-based radio group for plantingLocation instead of dropdown
+**Date:** 2026-03-19
+**Decision:** Replaced `<app-select>` for `plantingLocation` with a custom icon-button radio group using inline SVG icons (sun, partial-sun/half-sun, moon/shade). Created a shared `PlantingLocationIconComponent` reused in the form, list badges, and detail badges.
+**Why:** Three fixed options with strong visual identity are better served by icon buttons than a dropdown. Improves discoverability and touch targets. Same icons in badges provide visual consistency.
+**Consequence:** The form field is a custom implementation (not using `@ui RadioGroupComponent`) because the icon-button layout differs from the standard dot-radio pattern. `PlantingLocationIconComponent` is a shared dependency across 3 feature components.
+
+---
+
 <!-- Add new decisions below -->

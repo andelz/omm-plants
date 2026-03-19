@@ -4,11 +4,12 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ButtonComponent, BadgeComponent } from '@ui';
 import { DbService } from '../../services/db.service';
 import { Plant, CareTask, daysUntilDue, dueStatus, DueStatus, CARE_INTERVALS } from '../../models/plant.model';
+import { PlantingLocationIconComponent } from '../../components/planting-location-icon/planting-location-icon.component';
 
 @Component({
   selector: 'app-plant-detail',
   standalone: true,
-  imports: [RouterLink, TranslateModule, ButtonComponent, BadgeComponent],
+  imports: [RouterLink, TranslateModule, ButtonComponent, BadgeComponent, PlantingLocationIconComponent],
   templateUrl: './plant-detail.component.html',
   styleUrl: './plant-detail.component.scss',
 })

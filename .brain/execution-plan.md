@@ -19,6 +19,8 @@
 - [x] Refactor settings to use `@ui` components (SelectComponent, ToggleComponent, ButtonComponent)
 - [x] Refactor share-receiver to use `@ui` components (ButtonComponent)
 - [x] Clean up redundant CSS from SCSS files
+- [x] Replace plantingLocation `<app-select>` with icon-based radio group (a11y: radiogroup role, arrow keys, roving tabindex)
+- [x] Create shared `PlantingLocationIconComponent` and add icons to badges on list cards + detail page
 - [~] Migrate hardcoded SCSS values to `@ui` design tokens (146 occurrences in 6 files)
 - [ ] Commit changes
 

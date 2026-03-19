@@ -3,6 +3,7 @@ import { ReactiveFormsModule, FormBuilder, FormArray, Validators, FormGroup } fr
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { InputComponent, SelectComponent, TextareaComponent, ButtonComponent } from '@ui';
+import { PlantingLocationIconComponent } from '../../components/planting-location-icon/planting-location-icon.component';
 import { DbService } from '../../services/db.service';
 import { Plant, CARE_INTERVALS, CareTask, CareInterval, LinkEntry } from '../../models/plant.model';
 import { PlantIdService, PlantIdResult, PlantIdError } from '../../services/plant-id.service';
@@ -24,7 +25,7 @@ const INTERVAL_KEY_MAP: Record<CareInterval, string> = {
 @Component({
   selector: 'app-plant-form',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink, TranslateModule, InputComponent, SelectComponent, TextareaComponent, ButtonComponent],
+  imports: [ReactiveFormsModule, RouterLink, TranslateModule, InputComponent, SelectComponent, TextareaComponent, ButtonComponent, PlantingLocationIconComponent],
   templateUrl: './plant-form.component.html',
   styleUrl: './plant-form.component.scss',
 })
@@ -45,6 +46,11 @@ export class PlantFormComponent implements OnInit {
   identificationError = signal<string | null>(null);
 
   readonly intervals = CARE_INTERVALS.map(i => ({ value: i.value, labelKey: INTERVAL_KEY_MAP[i.value] }));
+  readonly locationOptions = [
+    { value: 'sun' as const,         labelKey: 'location.sun' },
+    { value: 'partial-sun' as const, labelKey: 'location.partial_sun' },
+    { value: 'shade' as const,       labelKey: 'location.shade' },
+  ];
   readonly careTasks = [
     { key: 'watering',    labelKey: 'care_task.watering',    icon: '💧' },
     { key: 'pruning',     labelKey: 'care_task.pruning',     icon: '✂️' },
@@ -75,6 +81,31 @@ export class PlantFormComponent implements OnInit {
 
   get linksArray(): FormArray {
     return this.form.get('links') as FormArray;
+  }
+
+  selectLocation(value: Plant['plantingLocation']) {
+    this.form.get('plantingLocation')?.setValue(value);
+  }
+
+  onLocationKeydown(event: KeyboardEvent) {
+    const values = this.locationOptions.map(o => o.value);
+    const current = this.form.get('plantingLocation')?.value;
+    const idx = values.indexOf(current);
+    let next: number | null = null;
+
+    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+      next = (idx + 1) % values.length;
+    } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+      next = (idx - 1 + values.length) % values.length;
+    }
+
+    if (next !== null) {
+      event.preventDefault();
+      this.selectLocation(values[next]);
+      const group = (event.currentTarget as HTMLElement);
+      const buttons = group.querySelectorAll<HTMLButtonElement>('[role="radio"]');
+      buttons[next]?.focus();
+    }
   }
 
   async ngOnInit() {

@@ -103,6 +103,9 @@
 
 // Location badges are domain-specific (sun/shade colors), keep custom
 .badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
   font-size: 0.7rem;
   font-weight: 500;
   padding: 0.2rem 0.5rem;

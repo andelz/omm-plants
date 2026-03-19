@@ -40,7 +40,7 @@
             <div class="card-body">
               <div class="card-header-row">
                 <h2 class="card-name">{{ plant.name }}</h2>
-                <span class="badge badge-{{ plant.plantingLocation }}">{{ locationLabel(plant.plantingLocation) }}</span>
+                <span class="badge badge-{{ plant.plantingLocation }}"><app-planting-location-icon [location]="plant.plantingLocation" />{{ locationLabel(plant.plantingLocation) }}</span>
               </div>
               @if (nextDueNote(plant)) {
                 <p class="card-care due-note due-{{ plantStatus(plant) }}">

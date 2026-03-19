@@ -27,7 +27,7 @@
     <div class="detail-card">
       <div class="name-row">
         <h1 class="plant-name">{{ plant()!.name }}</h1>
-        <span class="badge badge-{{ plant()!.plantingLocation }}">{{ locationLabel(plant()!.plantingLocation) }}</span>
+        <span class="badge badge-{{ plant()!.plantingLocation }}"><app-planting-location-icon [location]="plant()!.plantingLocation" />{{ locationLabel(plant()!.plantingLocation) }}</span>
       </div>
 
       <a class="search-link" [href]="searchUrl(plant()!.name)" target="_blank" rel="noopener noreferrer">
