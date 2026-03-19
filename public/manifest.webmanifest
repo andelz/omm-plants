@@ -8,9 +8,15 @@
   "icons": [
     {
       "src": "/leaf.svg",
-      "sizes": "144x144",
+      "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"
+    },
+    {
+      "src": "/leaf-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
     }
   ],
   "share_target": {
