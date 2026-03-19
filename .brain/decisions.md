@@ -34,4 +34,12 @@ Architectural decisions and rationale. Each entry: **date · decision · why**.
 **Why:** Keeps feature components thin and enables visual consistency without a third-party component library.
 **Consequence:** New UI elements should be added to `src/lib/ui/` before being used in features.
 
+## ADR-005 · Web Share Target bridged via App component init
+**Date:** 2026-03-19
+**Decision:** The Web Share Target API navigates to a real path (`/share?url=...`), but the app uses hash routing. Instead of adding server-side redirects or modifying index.html, the root `App.ngOnInit()` checks `window.location.pathname === '/share'`, buffers the params in `ShareIntentService`, replaces the URL via `history.replaceState`, and navigates to the hash route `/#/share`.
+**Why:** Keeps all logic in Angular-land (testable, no index.html hacks), works with the existing Angular service worker (which serves index.html for all navigation requests), and requires no server configuration.
+**Consequence:** The `App` component has a dependency on `Router` and `ShareIntentService`; the share interception runs on every app boot but short-circuits immediately when pathname is not `/share`.
+
+---
+
 <!-- Add new decisions below -->

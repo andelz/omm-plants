@@ -58,6 +58,22 @@
 
 ---
 
+## Epic: Web Share Target  [branch: master]
+
+### Steps
+- [x] Create `public/manifest.webmanifest` with `share_target` declaration
+- [x] Add manifest link + theme-color meta to `index.html`
+- [x] Create `ShareIntentService` (buffer + URL extraction)
+- [x] Intercept share navigation in root `App` component
+- [x] Create `ShareReceiverComponent` (plant picker UI)
+- [x] Register `/share` route in `app.routes.ts`
+- [x] Add i18n keys (EN + DE)
+- [x] Fix `app.spec.ts` and verify build + tests pass
+- [ ] Generate proper PWA icons (192x192, 512x512 PNG)
+- [ ] End-to-end test on deployed/installed PWA
+
+---
+
 ## Completed epics
 
 _None yet._
