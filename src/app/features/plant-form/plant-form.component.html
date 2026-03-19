@@ -13,10 +13,9 @@
 
     <div class="field">
       <label class="label" for="name">{{ 'plant_form.name_label' | translate }} <span class="required">*</span></label>
-      <input id="name" type="text" class="input" formControlName="name" [placeholder]="'plant_form.name_placeholder' | translate" />
-      @if (form.get('name')?.invalid && form.get('name')?.touched) {
-        <span class="error">{{ 'plant_form.name_required' | translate }}</span>
-      }
+      <app-input formControlName="name" [placeholder]="'plant_form.name_placeholder' | translate"
+                 [invalid]="!!(form.get('name')?.invalid && form.get('name')?.touched)"
+                 [errorMessage]="(form.get('name')?.invalid && form.get('name')?.touched) ? ('plant_form.name_required' | translate) : ''" />
     </div>
 
     <div class="field">
@@ -33,11 +32,11 @@
 
     <div class="field">
       <label class="label" for="location">{{ 'plant_form.location_label' | translate }}</label>
-      <select id="location" class="input" formControlName="plantingLocation">
+      <app-select formControlName="plantingLocation">
         <option value="sun">{{ 'location.sun' | translate }}</option>
         <option value="partial-sun">{{ 'location.partial_sun' | translate }}</option>
         <option value="shade">{{ 'location.shade' | translate }}</option>
-      </select>
+      </app-select>
     </div>
 
     <div class="field">
@@ -54,7 +53,7 @@
           <input id="photo-camera" type="file" accept="image/*" capture="environment" class="sr-only" (change)="onPhotoChange($event)" />
         </label>
         @if (form.get('photo')?.value) {
-          <button type="button" class="btn-outline btn-sm photo-btn photo-btn-remove" (click)="removePhoto()">{{ 'plant_form.photo_remove' | translate }}</button>
+          <app-button variant="destructive" size="sm" (click)="removePhoto()">{{ 'plant_form.photo_remove' | translate }}</app-button>
         }
       </div>
       @if (form.get('photo')?.value) {
@@ -62,15 +61,12 @@
           <img [src]="form.get('photo')?.value" [alt]="'plant_form.photo_preview_alt' | translate" />
         </div>
         @if (premium.enabled()) {
-          <button type="button" class="btn-outline btn-sm identify-btn" (click)="identifyPlant()" [disabled]="identifying()">
-            @if (identifying()) {
-              <span class="identify-spinner"></span>
-              {{ 'plant_form.identifying' | translate }}
-            } @else {
+          <app-button variant="outline" size="sm" class="identify-btn" (click)="identifyPlant()" [disabled]="identifying()" [loading]="identifying()">
+            @if (!identifying()) {
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-              {{ 'plant_form.identify' | translate }}
             }
-          </button>
+            {{ (identifying() ? 'plant_form.identifying' : 'plant_form.identify') | translate }}
+          </app-button>
           @if (identificationResult(); as result) {
             <span class="identify-result">{{ 'plant_form.identify_result' | translate:{ name: result.name, probability: result.probability } }}</span>
           }
@@ -99,12 +95,12 @@
           <div class="care-row-inputs">
             <div class="field">
               <label class="label-sm" [for]="task.key + '-interval'">{{ 'plant_form.interval_label' | translate }}</label>
-              <select [id]="task.key + '-interval'" class="input input-sm" formControlName="interval">
+              <app-select formControlName="interval">
                 <option value="">{{ 'plant_form.interval_not_set' | translate }}</option>
                 @for (opt of intervals; track opt.value) {
                   <option [value]="opt.value">{{ opt.labelKey | translate }}</option>
                 }
-              </select>
+              </app-select>
             </div>
             <div class="field">
               <label class="label-sm" [for]="task.key + '-lastDone'">{{ 'plant_form.last_done_label' | translate }}</label>
@@ -119,24 +115,24 @@
       <label class="label">{{ 'plant_form.links_label' | translate }}</label>
       @for (ctrl of linksArray.controls; track $index) {
         <div class="link-row" [formGroupName]="$index">
-          <input type="url" class="input" formControlName="url" [placeholder]="'plant_form.link_placeholder' | translate" />
-          <input type="text" class="input input-sm" formControlName="title" [placeholder]="'plant_form.link_title_placeholder' | translate" />
-          <button type="button" class="btn-outline btn-sm" (click)="removeLink($index)">{{ 'plant_form.link_remove' | translate }}</button>
+          <app-input type="url" formControlName="url" [placeholder]="'plant_form.link_placeholder' | translate" />
+          <app-input formControlName="title" [placeholder]="'plant_form.link_title_placeholder' | translate" />
+          <app-button variant="outline" size="sm" (click)="removeLink($index)">{{ 'plant_form.link_remove' | translate }}</app-button>
         </div>
       }
-      <button type="button" class="btn-outline btn-sm add-link-btn" (click)="addLink()">{{ 'plant_form.link_add' | translate }}</button>
+      <app-button variant="outline" size="sm" class="add-link-btn" (click)="addLink()">{{ 'plant_form.link_add' | translate }}</app-button>
     </div>
 
     <div class="field">
       <label class="label" for="notes">{{ 'plant_form.notes_label' | translate }}</label>
-      <textarea id="notes" class="input textarea" formControlName="notes" rows="4" [placeholder]="'plant_form.notes_placeholder' | translate"></textarea>
+      <app-textarea formControlName="notes" [rows]="4" [placeholder]="'plant_form.notes_placeholder' | translate" />
     </div>
 
     <div class="form-actions">
-      <a routerLink="/plants" class="btn-outline">{{ 'plant_form.cancel' | translate }}</a>
-      <button type="submit" class="btn-primary" [disabled]="submitting()">
+      <app-button variant="outline" routerLink="/plants">{{ 'plant_form.cancel' | translate }}</app-button>
+      <app-button variant="primary" type="submit" [disabled]="submitting()" [loading]="submitting()">
         {{ submitting() ? ('plant_form.saving' | translate) : ((isEdit() ? 'plant_form.update' : 'plant_form.save') | translate) }}
-      </button>
+      </app-button>
     </div>
   </form>
 </div>

@@ -2,6 +2,7 @@ import { Component, inject, OnInit, signal, computed } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { ButtonComponent } from '@ui';
 import { ShareIntentService } from '../../services/share-intent.service';
 import { DbService } from '../../services/db.service';
 import { Plant } from '../../models/plant.model';
@@ -9,7 +10,7 @@ import { Plant } from '../../models/plant.model';
 @Component({
   selector: 'app-share-receiver',
   standalone: true,
-  imports: [FormsModule, RouterLink, TranslateModule],
+  imports: [FormsModule, RouterLink, TranslateModule, ButtonComponent],
   templateUrl: './share-receiver.component.html',
   styleUrl: './share-receiver.component.scss',
 })

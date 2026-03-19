@@ -56,6 +56,7 @@
   color: var(--destructive);
 }
 
+// Keep native input styling for location field with datalist
 .input {
   background: var(--input-bg);
   border: 1px solid var(--border);
@@ -89,26 +90,26 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+  align-items: center;
 }
 
 .photo-btn {
   gap: 0.35rem;
   cursor: pointer;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--fg);
+  border-radius: 6px;
+  padding: 0.3rem 0.625rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  transition: background 0.15s;
 
-  &.photo-btn-remove {
-    border-color: var(--destructive);
-    color: var(--destructive);
-
-    &:hover {
-      background: var(--destructive);
-      color: #fff;
-    }
+  &:hover {
+    background: var(--border);
   }
-}
-
-.textarea {
-  resize: vertical;
-  min-height: 100px;
 }
 
 .photo-preview {
@@ -127,22 +128,7 @@
 }
 
 .identify-btn {
-  gap: 0.35rem;
   margin-top: 0.5rem;
-}
-
-.identify-spinner {
-  display: inline-block;
-  width: 14px;
-  height: 14px;
-  border: 2px solid var(--border);
-  border-top-color: var(--fg);
-  border-radius: 50%;
-  animation: spin 0.6s linear infinite;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
 }
 
 .identify-result {
@@ -240,6 +226,7 @@
   color: var(--muted);
 }
 
+// Keep native date input styling
 .input-sm {
   padding: 0.375rem 0.625rem;
   font-size: 0.85rem;
@@ -249,8 +236,9 @@
   display: flex;
   gap: 0.5rem;
   margin-bottom: 0.5rem;
+  align-items: flex-start;
 
-  .input {
+  app-input {
     flex: 1;
   }
 }
@@ -259,63 +247,10 @@
   margin-top: 0.25rem;
 }
 
-.error {
-  font-size: 0.8rem;
-  color: var(--destructive);
-}
-
 .form-actions {
   display: flex;
   justify-content: flex-end;
   gap: 0.75rem;
   padding-top: 0.5rem;
   border-top: 1px solid var(--border);
-}
-
-.btn-primary {
-  background: var(--fg);
-  color: var(--bg);
-  border: none;
-  border-radius: 6px;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  font-weight: 500;
-  font-size: 0.9rem;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  transition: opacity 0.15s;
-
-  &:hover:not(:disabled) {
-    opacity: 0.85;
-  }
-
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-}
-
-.btn-outline {
-  background: transparent;
-  border: 1px solid var(--border);
-  color: var(--fg);
-  border-radius: 6px;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  font-weight: 500;
-  font-size: 0.9rem;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  transition: background 0.15s;
-
-  &:hover {
-    background: var(--border);
-  }
-}
-
-.btn-sm {
-  padding: 0.3rem 0.625rem;
-  font-size: 0.8rem;
 }

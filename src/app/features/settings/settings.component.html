@@ -7,11 +7,11 @@
         <span class="setting-label">{{ 'settings.language_label' | translate }}</span>
         <span class="setting-description">{{ 'settings.language_description' | translate }}</span>
       </div>
-      <select class="lang-select" [value]="currentLang()" (change)="setLanguage($any($event.target).value)">
+      <app-select class="lang-select" [ngModel]="currentLang()" (ngModelChange)="setLanguage($event)">
         @for (lang of languages; track lang.code) {
           <option [value]="lang.code">{{ lang.label }}</option>
         }
-      </select>
+      </app-select>
     </div>
   </div>
 
@@ -21,9 +21,7 @@
         <span class="setting-label">{{ 'settings.dark_mode_label' | translate }}</span>
         <span class="setting-description">{{ 'settings.dark_mode_description' | translate }}</span>
       </div>
-      <button class="toggle-btn" (click)="theme.toggle()" [class.active]="theme.isDark()" [attr.aria-label]="'settings.toggle_label' | translate">
-        <span class="toggle-thumb"></span>
-      </button>
+      <app-toggle [ngModel]="theme.isDark()" (ngModelChange)="theme.toggle()" [attr.aria-label]="'settings.toggle_label' | translate" />
     </div>
   </div>
 
@@ -36,9 +34,7 @@
         </span>
         <span class="setting-description">{{ 'settings.premium_description' | translate }}</span>
       </div>
-      <button class="toggle-btn" (click)="premium.toggle()" [class.active]="premium.enabled()" [attr.aria-label]="'settings.premium_toggle' | translate">
-        <span class="toggle-thumb"></span>
-      </button>
+      <app-toggle [ngModel]="premium.enabled()" (ngModelChange)="premium.toggle()" [attr.aria-label]="'settings.premium_toggle' | translate" />
     </div>
   </div>
 
@@ -49,7 +45,7 @@
         <span class="setting-label">{{ 'settings.clear_data_label' | translate }}</span>
         <span class="setting-description">{{ 'settings.clear_data_description' | translate }}</span>
       </div>
-      <button class="btn-destructive" (click)="clearAllData()">{{ 'settings.clear_data_btn' | translate }}</button>
+      <app-button variant="destructive" (click)="clearAllData()">{{ 'settings.clear_data_btn' | translate }}</app-button>
     </div>
   </div>
 </div>

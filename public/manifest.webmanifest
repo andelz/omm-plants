@@ -1,10 +1,10 @@
 {
-  "name": "OmmPlants",
-  "short_name": "OmmPlants",
+  "name": "Sprouts",
+  "short_name": "Sprouts",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#768a2f",
-  "theme_color": "#768a2f",
+  "background_color": "#1e1e1e",
+  "theme_color": "#1e1e1e",
   "icons": [
     {
       "src": "/leaf.svg",

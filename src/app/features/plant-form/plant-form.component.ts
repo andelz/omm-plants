@@ -2,6 +2,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormArray, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { InputComponent, SelectComponent, TextareaComponent, ButtonComponent } from '@ui';
 import { DbService } from '../../services/db.service';
 import { Plant, CARE_INTERVALS, CareTask, CareInterval, LinkEntry } from '../../models/plant.model';
 import { PlantIdService, PlantIdResult, PlantIdError } from '../../services/plant-id.service';
@@ -23,7 +24,7 @@ const INTERVAL_KEY_MAP: Record<CareInterval, string> = {
 @Component({
   selector: 'app-plant-form',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink, TranslateModule],
+  imports: [ReactiveFormsModule, RouterLink, TranslateModule, InputComponent, SelectComponent, TextareaComponent, ButtonComponent],
   templateUrl: './plant-form.component.html',
   styleUrl: './plant-form.component.scss',
 })

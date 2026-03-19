@@ -10,6 +10,20 @@
 
 ---
 
+## Epic: UI library integration  [branch: master]
+
+### Steps
+- [x] Refactor plant-form to use `@ui` components (InputComponent, SelectComponent, TextareaComponent, ButtonComponent)
+- [x] Refactor plant-detail to use `@ui` components (ButtonComponent, BadgeComponent)
+- [x] Refactor plant-list to use `@ui` components (ButtonComponent, BadgeComponent)
+- [x] Refactor settings to use `@ui` components (SelectComponent, ToggleComponent, ButtonComponent)
+- [x] Refactor share-receiver to use `@ui` components (ButtonComponent)
+- [x] Clean up redundant CSS from SCSS files
+- [~] Migrate hardcoded SCSS values to `@ui` design tokens (146 occurrences in 6 files)
+- [ ] Commit changes
+
+---
+
 ## Epic: Plant location grouping  [branch: master]
 
 ### Steps

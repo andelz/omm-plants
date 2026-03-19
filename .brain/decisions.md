@@ -42,4 +42,20 @@ Architectural decisions and rationale. Each entry: **date · decision · why**.
 
 ---
 
+## ADR-006 · UI library moved to `projects/ui/` as Angular library
+**Date:** 2026-03-19
+**Decision:** Shared UI components extracted from `src/lib/ui/` into a proper Angular library at `projects/ui/`, built via ng-packagr to `dist/ui/`, imported via `@ui` path alias. A separate `projects/ui-playground/` app showcases all components.
+**Why:** Enables independent build/test of UI components, proper tree-shaking, and a dedicated playground for design iteration. Clean separation between app code and design system.
+**Consequence:** Must run `ng build ui` before the main app if UI library source changes. Feature components import from `@ui` and use CVA-based form controls with `formControlName` or `ngModel`.
+
+---
+
+## ADR-007 · Selective adoption of @ui components
+**Date:** 2026-03-19
+**Decision:** Not all native elements were replaced with `@ui` components. Kept native for: `<input type="date">` and `<input type="file">` (unsupported types), search inputs outside reactive forms (simpler as native), and location badges with domain-specific sun/shade color schemes.
+**Why:** The `InputComponent` CVA only supports `text|email|number|search|password|tel|url`. Non-form-bound inputs would need `ngModel` overhead for no benefit. Location badges have custom semantic colors that don't map to `BadgeComponent` variants.
+**Consequence:** Some native `.input`/`.badge` CSS remains in component SCSS files alongside `@ui` component usage.
+
+---
+
 <!-- Add new decisions below -->

@@ -6,20 +6,27 @@
 2026-03-19
 
 ## What was done this session
-- Fixed header styling so inactive nav links and theme-toggle hover work correctly on `--primary` background in both light and dark mode
-- Changed inactive nav-link color from `var(--muted)` (theme-dependent) to `rgba(255, 255, 255, 0.65)` (consistent on green bg)
-- Changed theme-toggle hover from `var(--on-primary)` (solid white, hid icon) to `rgba(255, 255, 255, 0.15)` (subtle highlight)
+- Refactored all 5 feature components to use `@ui` library components instead of native HTML + custom CSS
+- **plant-form:** `<input>` → `<app-input>` (CVA), `<select>` → `<app-select>`, `<textarea>` → `<app-textarea>`, buttons → `<app-button>` with variant/size/loading
+- **plant-detail:** buttons → `<app-button>`, due-status chips → `<app-badge>` with error/warning/default variants
+- **plant-list:** add/delete buttons → `<app-button>`, status badges → `<app-badge>`
+- **settings:** language select → `<app-select>` (ngModel), toggle buttons → `<app-toggle>` (ngModel), delete button → `<app-button>`
+- **share-receiver:** cancel link → `<app-button variant="ghost">`
+- Cleaned up ~270 lines of redundant button/input/toggle CSS from component SCSS files
+- Kept native elements where appropriate: `<input type="date">`, `<input type="file">`, search inputs (not form-bound), location badges (domain-specific sun/shade colors)
+- Build passes clean, no warnings
 
 ## Current state
 - Branch: master
-- Commit: `fb9b29e primary` — all changes committed and clean
-- No open PRs
+- 15 files modified, not yet committed
+- Build: clean (`ng build` succeeds, 0 warnings)
 
 ## Open questions / blockers
-- PWA manifest only has `favicon.ico` as icon — proper 192x192 and 512x512 PNG icons should be created for a complete PWA install experience
-- Share Target only works when the PWA is **installed** — cannot be tested in dev mode with `ng serve`
+- App component SCSS files still use hardcoded values (rem, hex colors, rgba) instead of the `@ui` design tokens (`--space-*`, `--text-*`, `--radius-*`, `--color-*` etc.) — 146 occurrences across 6 files. The tokens are imported in `styles.scss` and available globally but not yet consumed.
+- PWA icons still missing (192x192, 512x512)
 
 ## What to do next
-1. Generate proper PWA icons (192x192, 512x512) and update manifest
-2. Test share target flow on a deployed/production build
-3. Begin weather forecast feature (Phase 1)
+1. Migrate component SCSS from hardcoded values to `@ui` design tokens (146 occurrences across 6 files)
+2. Commit the @ui integration changes
+3. Generate proper PWA icons
+4. Begin weather forecast feature (Phase 1)

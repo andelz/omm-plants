@@ -84,6 +84,7 @@
   letter-spacing: -0.02em;
 }
 
+// Location badges are domain-specific (sun/shade colors), keep custom
 .badge {
   font-size: 0.75rem;
   font-weight: 500;
@@ -179,18 +180,6 @@
   flex: 1;
 }
 
-.due-chip {
-  font-size: 0.7rem;
-  font-weight: 600;
-  padding: 0.1rem 0.4rem;
-  border-radius: 999px;
-
-  &.due-chip-overdue   { background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }
-  &.due-chip-due-today { background: #fff7ed; color: #c2410c; border: 1px solid #fed7aa; }
-  &.due-chip-due-soon  { background: #fefce8; color: #854d0e; border: 1px solid #fef08a; }
-  &.due-chip-ok        { background: var(--border); color: var(--muted); }
-}
-
 .care-card-body {
   display: flex;
   flex-direction: column;
@@ -211,30 +200,7 @@
   color: var(--destructive);
 }
 
-.btn-done {
-  margin-top: 0.25rem;
-  background: var(--fg);
-  color: var(--bg);
-  border: none;
-  border-radius: 5px;
-  padding: 0.3rem 0.625rem;
-  font-size: 0.78rem;
-  font-weight: 500;
-  cursor: pointer;
-  align-self: flex-start;
-  transition: opacity 0.15s;
-
-  &:hover {
-    opacity: 0.8;
-  }
-}
-
 [data-theme="dark"] {
-  .due-chip {
-    &.due-chip-overdue   { background: #450a0a; color: #f87171; border-color: #7f1d1d; }
-    &.due-chip-due-today { background: #431407; color: #fb923c; border-color: #7c2d12; }
-    &.due-chip-due-soon  { background: #422006; color: #facc15; border-color: #713f12; }
-  }
   .care-card {
     &.care-status-overdue   { border-color: #7f1d1d; }
     &.care-status-due-today { border-color: #7c2d12; }
@@ -326,40 +292,4 @@
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-}
-
-.btn-outline {
-  background: transparent;
-  border: 1px solid var(--border);
-  color: var(--fg);
-  border-radius: 6px;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  font-weight: 500;
-  font-size: 0.9rem;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  transition: background 0.15s;
-
-  &:hover {
-    background: var(--border);
-  }
-}
-
-.btn-destructive {
-  background: transparent;
-  border: 1px solid var(--destructive);
-  color: var(--destructive);
-  border-radius: 6px;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  font-weight: 500;
-  font-size: 0.9rem;
-  transition: background 0.15s;
-
-  &:hover {
-    background: var(--destructive);
-    color: #fff;
-  }
 }

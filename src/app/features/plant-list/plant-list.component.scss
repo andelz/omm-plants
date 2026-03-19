@@ -101,54 +101,7 @@
   &.due-due-soon  { color: #eab308; font-weight: 500; }
 }
 
-.status-badge {
-  display: inline-block;
-  font-size: 0.7rem;
-  font-weight: 600;
-  padding: 0.15rem 0.5rem;
-  border-radius: 999px;
-  margin-bottom: 0.375rem;
-
-  &.status-overdue {
-    background: #fef2f2;
-    color: #dc2626;
-    border: 1px solid #fecaca;
-  }
-  &.status-due-today {
-    background: #fff7ed;
-    color: #c2410c;
-    border: 1px solid #fed7aa;
-  }
-  &.status-due-soon {
-    background: #fefce8;
-    color: #854d0e;
-    border: 1px solid #fef08a;
-  }
-}
-
-[data-theme="dark"] {
-  .status-badge {
-    &.status-overdue   { background: #450a0a; color: #f87171; border-color: #7f1d1d; }
-    &.status-due-today { background: #431407; color: #fb923c; border-color: #7c2d12; }
-    &.status-due-soon  { background: #422006; color: #facc15; border-color: #713f12; }
-  }
-}
-
-.card-notes {
-  font-size: 0.8rem;
-  color: var(--muted);
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.card-footer {
-  padding: 0.5rem 0.875rem 0.875rem;
-  display: flex;
-  justify-content: flex-end;
-}
-
+// Location badges are domain-specific (sun/shade colors), keep custom
 .badge {
   font-size: 0.7rem;
   font-weight: 500;
@@ -190,6 +143,25 @@
   }
 }
 
+app-badge {
+  margin-bottom: 0.375rem;
+}
+
+.card-notes {
+  font-size: 0.8rem;
+  color: var(--muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-footer {
+  padding: 0.5rem 0.875rem 0.875rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
 .empty-state {
   text-align: center;
   padding: 3rem 1rem;
@@ -201,47 +173,7 @@
   font-weight: 500;
 }
 
-.btn-primary {
-  background: var(--fg);
-  color: var(--bg);
-  border: none;
-  border-radius: 6px;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  font-weight: 500;
-  font-size: 0.9rem;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  transition: opacity 0.15s;
-
-  &:hover {
-    opacity: 0.85;
-  }
-}
-
-.btn-destructive {
-  background: transparent;
-  border: 1px solid var(--destructive);
-  color: var(--destructive);
-  border-radius: 6px;
-  padding: 0.3rem 0.625rem;
-  cursor: pointer;
-  font-size: 0.8rem;
-  font-weight: 500;
-  transition: background 0.15s;
-
-  &:hover {
-    background: var(--destructive);
-    color: #fff;
-  }
-}
-
-.btn-sm {
-  padding: 0.25rem 0.5rem;
-  font-size: 0.75rem;
-}
-
+// Keep native search input styling
 .input {
   background: var(--input-bg);
   border: 1px solid var(--border);

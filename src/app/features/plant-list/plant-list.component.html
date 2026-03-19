@@ -1,6 +1,6 @@
 <div class="list-header">
   <h1 class="page-title">{{ 'plant_list.title' | translate }}</h1>
-  <a routerLink="/plants/new" class="btn-primary">{{ 'plant_list.add_plant' | translate }}</a>
+  <app-button variant="primary" routerLink="/plants/new">{{ 'plant_list.add_plant' | translate }}</app-button>
 </div>
 
 <div class="search-bar">
@@ -48,14 +48,14 @@
                 </p>
               }
               @if (plantStatus(plant) && plantStatus(plant) !== 'ok') {
-                <span class="status-badge status-{{ plantStatus(plant) }}">{{ statusLabel(plantStatus(plant)) }}</span>
+                <app-badge [variant]="plantStatus(plant) === 'overdue' ? 'error' : 'warning'">{{ statusLabel(plantStatus(plant)) }}</app-badge>
               }
               @if (plant.notes) {
                 <p class="card-notes">{{ plant.notes }}</p>
               }
             </div>
             <div class="card-footer">
-              <button class="btn-destructive btn-sm" (click)="deleteCard($event, plant)">{{ 'plant_list.delete' | translate }}</button>
+              <app-button variant="destructive" size="sm" (click)="deleteCard($event, plant)">{{ 'plant_list.delete' | translate }}</app-button>
             </div>
           </a>
         }

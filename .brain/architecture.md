@@ -33,8 +33,9 @@ src/
       share-receiver/      — Web Share Target plant picker (receives shared URLs, lets user pick a plant)
     components/
       layout/              — LayoutComponent (shell/nav wrapper)
-  lib/
-    ui/                    — shared UI primitives: badge, button, card, icon, input, label, select, switch, utils
+projects/
+  ui/                      — @ui component library (ng-packagr), built to dist/ui/
+  ui-playground/           — standalone showcase app for @ui components
 ```
 
 ---
@@ -48,7 +49,7 @@ src/
 - **i18n:** ngx-translate with JSON files at `public/i18n/{en,de}.json`; extract with `npm run i18n:extract`
 - **PWA:** `@angular/service-worker` registered after stable, ngsw-config.json at root, `public/manifest.webmanifest` with `share_target`
 - **Web Share Target:** Manifest declares `GET /share?url=&title=&text=`. Root `App` component intercepts real-path `/share` on init, buffers params in `ShareIntentService`, then redirects to hash route `/#/share`. This bridges the gap between the Share Target API (real paths) and hash-based routing.
-- **UI lib:** Shared primitives live in `src/lib/ui/` (badge, button, card, icon, input, label, select, switch)
+- **UI lib:** Component library in `projects/ui/`, built to `dist/ui/`, imported as `@ui` (path alias in tsconfig). Exports: BadgeComponent, ButtonComponent, CardComponent, CheckboxComponent, DialogComponent, InputComponent, RadioGroupComponent, RadioComponent, SelectComponent, SpinnerComponent, TextareaComponent, ToggleComponent, TooltipComponent. All are standalone, OnPush, and form controls implement ControlValueAccessor. Design tokens in `projects/ui/src/lib/_tokens.scss`, imported globally via `@use 'ui/tokens'` in `styles.scss`.
 - **Photos:** Stored as base64 strings in the `Plant.photo` field inside IndexedDB
 - **Location grouping:** `Plant.location` is an optional free-text string (e.g. "terasse"). Plant list groups by this field (alphabetical, unlabelled last). `PlantFormComponent` loads all existing location values on init and exposes them via a `<datalist>` for autocomplete. No DB migration needed — field is optional.
 

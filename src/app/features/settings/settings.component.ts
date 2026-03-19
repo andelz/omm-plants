@@ -1,5 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { SelectComponent, ToggleComponent, ButtonComponent } from '@ui';
 import { ThemeService } from '../../services/theme.service';
 import { DbService } from '../../services/db.service';
 import { PremiumService } from '../../services/premium.service';
@@ -14,7 +16,7 @@ export const LANGUAGES = [
 @Component({
   selector: 'app-settings',
   standalone: true,
-  imports: [TranslateModule],
+  imports: [FormsModule, TranslateModule, SelectComponent, ToggleComponent, ButtonComponent],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.scss',
 })

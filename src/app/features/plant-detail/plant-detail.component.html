@@ -1,7 +1,7 @@
 @if (notFound()) {
   <div class="not-found">
     <p>{{ 'plant_detail.not_found' | translate }}</p>
-    <a routerLink="/plants" class="btn-outline">{{ 'plant_detail.back_to_plants' | translate }}</a>
+    <app-button variant="outline" routerLink="/plants">{{ 'plant_detail.back_to_plants' | translate }}</app-button>
   </div>
 } @else if (plant()) {
   <div class="detail-page">
@@ -13,8 +13,8 @@
         {{ 'plant_detail.back' | translate }}
       </a>
       <div class="header-actions">
-        <a [routerLink]="['/plants', plant()!.id, 'edit']" class="btn-outline">{{ 'plant_detail.edit' | translate }}</a>
-        <button class="btn-destructive" (click)="deleteplant()">{{ 'plant_detail.delete' | translate }}</button>
+        <app-button variant="outline" [routerLink]="['/plants', plant()!.id, 'edit']">{{ 'plant_detail.edit' | translate }}</app-button>
+        <app-button variant="destructive" (click)="deleteplant()">{{ 'plant_detail.delete' | translate }}</app-button>
       </div>
     </div>
 
@@ -47,7 +47,7 @@
                 <span class="care-icon">{{ task.icon }}</span>
                 <span class="care-label">{{ task.labelKey | translate }}</span>
                 @if (taskStatus(careTask)) {
-                  <span class="due-chip due-chip-{{ taskStatus(careTask) }}">{{ dueLabel(careTask) }}</span>
+                  <app-badge [variant]="taskStatus(careTask) === 'overdue' ? 'error' : taskStatus(careTask) === 'due-today' ? 'warning' : taskStatus(careTask) === 'due-soon' ? 'warning' : 'default'">{{ dueLabel(careTask) }}</app-badge>
                 }
               </div>
               <div class="care-card-body">
@@ -59,7 +59,7 @@
                 }
               </div>
               @if (careTask.interval && careTask.interval !== 'as-needed') {
-                <button class="btn-done" (click)="markDone($any(task.key))">{{ 'plant_detail.done_today' | translate }}</button>
+                <app-button variant="primary" size="sm" (click)="markDone($any(task.key))">{{ 'plant_detail.done_today' | translate }}</app-button>
               }
             </div>
           }

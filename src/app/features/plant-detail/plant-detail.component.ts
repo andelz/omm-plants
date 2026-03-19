@@ -1,13 +1,14 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { ButtonComponent, BadgeComponent } from '@ui';
 import { DbService } from '../../services/db.service';
 import { Plant, CareTask, daysUntilDue, dueStatus, DueStatus, CARE_INTERVALS } from '../../models/plant.model';
 
 @Component({
   selector: 'app-plant-detail',
   standalone: true,
-  imports: [RouterLink, TranslateModule],
+  imports: [RouterLink, TranslateModule, ButtonComponent, BadgeComponent],
   templateUrl: './plant-detail.component.html',
   styleUrl: './plant-detail.component.scss',
 })

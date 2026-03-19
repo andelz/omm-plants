@@ -2,13 +2,14 @@ import { Component, inject, OnInit, signal, computed } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { ButtonComponent, BadgeComponent } from '@ui';
 import { DbService } from '../../services/db.service';
 import { Plant, worstStatus, DueStatus, daysUntilDue } from '../../models/plant.model';
 
 @Component({
   selector: 'app-plant-list',
   standalone: true,
-  imports: [RouterLink, FormsModule, TranslateModule],
+  imports: [RouterLink, FormsModule, TranslateModule, ButtonComponent, BadgeComponent],
   templateUrl: './plant-list.component.html',
   styleUrl: './plant-list.component.scss',
 })
