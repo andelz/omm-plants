@@ -57,3 +57,22 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+# Website
+
+How the frontend works unchanged
+The index.html already calls fetch('/api/subscribe', ...) — the netlify.toml redirect maps /api/* to the functions, so no frontend changes needed.
+
+To deploy
+
+cd website
+npx netlify login        # one-time auth
+npx netlify init         # link to a Netlify site
+npx netlify deploy --prod
+Or connect the repo to Netlify via the dashboard — set Base directory to website/ and it'll auto-deploy on push.
+
+To test locally
+
+cd website
+npx netlify dev
+This runs functions + static site together on localhost:8888. The Express server in server/ still works independently for local dev without Netlify (npm run dev on port 4000).

@@ -38,11 +38,11 @@ nav {
   border-bottom: 1px solid transparent;
 }
 
-nav.scrolled {
+/* nav.scrolled {
   background: rgba(248, 247, 244, 0.92);
   backdrop-filter: blur(12px);
   border-bottom-color: var(--border);
-}
+} */
 
 nav.scrolled .logo,
 nav.scrolled .btn-nav { color: var(--black); }
@@ -81,12 +81,20 @@ nav.scrolled .btn-nav:hover { background: var(--black); color: var(--white); }
 .hero-bg {
   position: absolute;
   inset: 0;
-  background-image: url('photo-1549878718-110e75fcc84b.avif');
+  background-image: url('hero.jpg');
   background-size: cover;
-  background-position: center 30%;
-  transform: scale(1.04);
-  transition: transform 0.1s linear;
-  will-change: transform;
+  background-position: center 0%;
+}
+
+@keyframes parallax-bg {
+  to { background-position: center 100%; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-bg {
+    animation: parallax-bg linear both;
+    animation-timeline: scroll();
+  }
 }
 
 .hero-bg::after {
@@ -386,25 +394,100 @@ h1 em { font-style: italic; color: #a8c8a8; }
 }
 .s-card-title.dark-text { color: var(--black); }
 
-/* ── Download ────────────────────────────────────── */
-.download {
+/* ── Early Access ────────────────────────────────── */
+.early-access {
   padding: 120px 40px;
   text-align: center;
   border-top: 1px solid var(--border);
 }
 
-.download h2 {
+.early-access h2 {
   font-family: 'Playfair Display', serif;
   font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 400;
   margin-bottom: 16px;
 }
 
-.download p {
+.early-access > p {
   font-size: 0.95rem;
   color: var(--mid);
-  max-width: 440px;
+  max-width: 480px;
   margin: 0 auto 32px;
+}
+
+.waitlist-form {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.input-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.input-row input[type="email"] {
+  flex: 1;
+  max-width: 300px;
+  padding: 14px 20px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  background: transparent;
+  color: var(--black);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input-row input[type="email"]:focus {
+  border-color: var(--green);
+}
+
+.input-row input[type="email"]::placeholder {
+  color: var(--mid);
+  opacity: 0.6;
+}
+
+.input-row .btn-primary {
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: 'Inter', sans-serif;
+}
+
+.form-hint {
+  font-size: 0.75rem;
+  color: var(--mid);
+  margin-top: 14px;
+  opacity: 0.7;
+}
+
+.waitlist-success {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.success-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--green);
+  color: #fff;
+  font-size: 1.4rem;
+  margin-bottom: 16px;
+}
+
+.waitlist-success p {
+  font-size: 0.95rem;
+  color: var(--mid);
+}
+
+.waitlist-success p strong {
+  color: var(--black);
 }
 
 .disclaimer {
@@ -456,7 +539,17 @@ footer p {
   .showcase-cards { width: 100%; align-items: center; }
   .s-card { width: 100%; max-width: 320px; }
 
-  .download { padding: 80px 24px; }
+  .early-access { padding: 80px 24px; }
+
+  .input-row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .input-row input[type="email"] {
+    max-width: 100%;
+    width: 100%;
+  }
 
   footer { padding: 32px 24px; flex-direction: column; align-items: flex-start; }
 }

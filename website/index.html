@@ -13,18 +13,18 @@
   <!-- NAV -->
   <nav>
     <span class="logo">OmmPlants</span>
-    <a href="#download" class="btn-nav">Get the app</a>
+    <a href="#download" class="btn-nav">Join waitlist</a>
   </nav>
 
   <!-- HERO -->
   <div class="hero-wrapper">
-  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-bg"></div>
   <section class="hero">
     <div class="hero-text">
       <p class="eyebrow">Plant care, simplified</p>
       <h1>Every leaf.<br /><em>Remembered.</em></h1>
       <p class="sub">OmmPlants tracks watering, pruning and fertilising schedules for all your plants — beautifully minimal, no account needed.</p>
-      <a href="#download" class="btn-primary">Download free</a>
+      <a href="#download" class="btn-primary">Get early access</a>
     </div>
     <div class="hero-visual">
       <div class="phone-shell">
@@ -115,11 +115,22 @@
     </div>
   </section>
 
-  <!-- DOWNLOAD -->
-  <section class="download" id="download">
-    <h2>Start for free</h2>
-    <p>Available as a Progressive Web App — install directly from your browser on any device.</p>
-    <a href="#" class="btn-primary">Open OmmPlants</a>
+  <!-- EARLY ACCESS -->
+  <section class="early-access" id="download">
+    <h2>Be the first to know</h2>
+    <p>OmmPlants is launching soon. Drop your email and we'll let you know when it's ready — plus early supporters get premium features free for a year.</p>
+    <form id="waitlistForm" class="waitlist-form" novalidate>
+      <div class="input-row">
+        <input type="email" id="waitlistEmail" placeholder="you@example.com" required autocomplete="email" />
+        <button type="submit" class="btn-primary">Join the waitlist</button>
+      </div>
+      <p class="form-hint">No spam, ever. Just one email when we launch.</p>
+    </form>
+    <div id="waitlistSuccess" class="waitlist-success" hidden>
+      <span class="success-icon">&#10003;</span>
+      <p><strong>You're on the list!</strong></p>
+      <p class="form-hint">We'll reach out as soon as OmmPlants is ready.</p>
+    </div>
     <p class="disclaimer">Works on iOS, Android, macOS and Windows.</p>
   </section>
 
@@ -131,21 +142,47 @@
 
   <script>
     // Nav: switch to light on scroll
-    const nav = document.querySelector('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 60);
-    }, { passive: true });
+    // const nav = document.querySelector('nav');
+    // window.addEventListener('scroll', () => {
+    //   nav.classList.toggle('scrolled', window.scrollY > 60);
+    // }, { passive: true });
 
-    // Subtle parallax on hero bg
-    const bg = document.getElementById('heroBg');
-    if (bg && window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
-      window.addEventListener('scroll', () => {
-        const y = window.scrollY;
-        if (y < window.innerHeight) {
-          bg.style.transform = `scale(1.04) translateY(${y * 0.25}px)`;
+    // Waitlist form
+    const form = document.getElementById('waitlistForm');
+    const success = document.getElementById('waitlistSuccess');
+    const submitBtn = form.querySelector('button[type="submit"]');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('waitlistEmail').value.trim();
+      if (!email) return;
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Joining…';
+
+      try {
+        const res = await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+          alert(data.error || 'Something went wrong. Please try again.');
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Join the waitlist';
+          return;
         }
-      }, { passive: true });
-    }
+
+        form.hidden = true;
+        success.hidden = false;
+      } catch {
+        alert('Could not reach the server. Please try again later.');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Join the waitlist';
+      }
+    });
   </script>
 </body>
 </html>
