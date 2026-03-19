@@ -16,8 +16,8 @@
     "module": "preserve",
     "baseUrl": ".",
     "paths": {
-      "@ui": ["./dist/ui"],
-      "@ui/*": ["./dist/ui/*"]
+      "@ui": ["./projects/ui/src/public-api.ts"],
+      "@ui/*": ["./projects/ui/src/*"]
     }
   },
   "angularCompilerOptions": {
