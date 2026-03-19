@@ -4,12 +4,13 @@
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#4caf50",
+  "theme_color": "#ffffff",
   "icons": [
     {
-      "src": "/favicon.ico",
-      "sizes": "any",
-      "type": "image/x-icon"
+      "src": "/leaf.svg",
+      "sizes": "144x144",
+      "type": "image/svg+xml",
+      "purpose": "any"
     }
   ],
   "share_target": {
