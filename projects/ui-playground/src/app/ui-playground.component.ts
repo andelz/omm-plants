@@ -1,5 +1,6 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { ThemeService } from '../../../../src/app/services/theme.service';
 
 const SECTIONS = [
   { path: 'button',   label: 'Button' },
@@ -26,4 +27,5 @@ const SECTIONS = [
 })
 export class UiPlaygroundComponent {
   readonly sections = SECTIONS;
+  protected readonly theme = inject(ThemeService);
 }

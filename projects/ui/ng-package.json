@@ -3,5 +3,9 @@
   "dest": "../../dist/ui",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "assets": [
+    "src/lib/_tokens.scss",
+    "src/lib/_mixins.scss"
+  ]
 }

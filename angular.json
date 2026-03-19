@@ -29,7 +29,10 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles.scss"]
+            "styles": ["src/styles.scss"],
+            "stylePreprocessorOptions": {
+              "includePaths": ["projects"]
+            }
           },
           "configurations": {
             "production": {
@@ -87,7 +90,10 @@
             "inlineStyleLanguage": "scss",
             "index": "projects/ui-playground/src/index.html",
             "outputPath": "dist/ui-playground",
-            "styles": ["src/styles.scss"]
+            "styles": ["src/styles.scss"],
+            "stylePreprocessorOptions": {
+              "includePaths": ["projects"]
+            }
           },
           "configurations": {
             "development": {

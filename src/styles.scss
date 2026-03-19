@@ -1,5 +1,5 @@
 // @use must come first in Sass
-@use './ui-tokens';
+@use 'ui/tokens';
 
 // Declare cascade layer order: tokens < reset < ui < app
 // ui layer = component library; app layer = feature/page styles (always wins)
